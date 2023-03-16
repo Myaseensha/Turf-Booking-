@@ -38,3 +38,8 @@ EdgeInsetsGeometry pTRL10 = const EdgeInsets.only(top: 10, right: 10, left: 10);
 EdgeInsetsGeometry pTRL20 = const EdgeInsets.only(top: 20, right: 20, left: 20);
 EdgeInsetsGeometry pTRL30 = const EdgeInsets.only(top: 30, right: 30, left: 30);
 EdgeInsetsGeometry pTRL40 = const EdgeInsets.only(top: 40, right: 40, left: 40);
+//------------------------------------------------------------
+EdgeInsetsGeometry pLT10 = const EdgeInsets.only(left: 10, top: 10);
+EdgeInsetsGeometry pLT20 = const EdgeInsets.only(left: 20, top: 20);
+EdgeInsetsGeometry pLT30 = const EdgeInsets.only(left: 30, top: 30);
+EdgeInsetsGeometry pLT40 = const EdgeInsets.only(left: 40, top: 40);

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:turf/core/color.dart';
+import 'package:turf/screen/onborde_screen/view/intro_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,10 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          textTheme: const TextTheme(displayLarge: TextStyle()),
+          primarySwatch: Colors.green,
+          appBarTheme: AppBarTheme(color: Cgreen)),
+      home: const LoginScreen(),
     );
   }
 }

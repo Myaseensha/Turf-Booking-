@@ -8,12 +8,14 @@ class Button extends StatelessWidget {
       required this.colorB,
       required this.colorF,
       required this.title,
-      required this.style})
+      required this.style,
+      required this.classname})
       : super(key: key);
   final Color colorF;
   final Color colorB;
   final String title;
   final TextStyle style;
+  final classname;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,7 +24,13 @@ class Button extends StatelessWidget {
         height: 50,
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => classname,
+                ));
+          },
           style: ElevatedButton.styleFrom(
             foregroundColor: colorF,
             backgroundColor: colorB,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/hardText.dart';
 import 'package:turf/core/padding.dart';
-import '../../util/button.dart';
+import 'package:turf/screen/user/view/user_signup_screen.dart';
+import '../../../util/button.dart';
+import '../../turfadd/view/turf_signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -37,12 +39,14 @@ class LoginScreen extends StatelessWidget {
             colorF: Cblack,
             title: 'To Get Listed',
             style: shortTextW,
+            classname: SignUpScreenTurf(),
           ),
           Button(
             colorB: Cwhite,
             colorF: Cgreen,
             title: 'To Book Avenue',
             style: shortTextB,
+            classname: SignUpScreenUser(),
           ),
         ],
       )),
