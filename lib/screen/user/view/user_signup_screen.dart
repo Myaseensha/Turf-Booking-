@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/screen/user/view/user_login_screen.dart';
+import 'package:turf/screen/user/view/vreyfication_screen.dart';
 import 'package:turf/util/from_filde.dart';
 
 import '../../../core/h_w.dart';
@@ -58,7 +59,11 @@ class SignUpScreenUser extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      return;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VerificationScreenUser(),
+                          ));
                     }
                   },
                   style: signup,

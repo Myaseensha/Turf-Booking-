@@ -3,6 +3,7 @@ import 'package:turf/core/color.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/turfadd/view/turf_login_screen.dart';
+import 'package:turf/screen/turfadd/view/vreyfication.dart';
 
 import '../../../util/from_filde.dart';
 
@@ -65,8 +66,12 @@ class SignUpScreenTurf extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      return;
-                    }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VerificationScreen(),
+                          ));
+                    } else {}
                   },
                   style: signup,
                   child: Text('SignUp', style: shortTextW),
