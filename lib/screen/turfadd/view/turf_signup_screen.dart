@@ -1,11 +1,17 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/h_w.dart';
+import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
+import 'package:turf/screen/turfadd/model/signup.dart';
 import 'package:turf/screen/turfadd/view/turf_login_screen.dart';
 import 'package:turf/screen/turfadd/view/vreyfication.dart';
-
-import '../../../util/from_filde.dart';
+import 'package:http/http.dart' as http;
+import 'package:turf/utils/url.dart';
+import '../../../widget/from_filde.dart';
 
 class SignUpScreenTurf extends StatelessWidget {
   SignUpScreenTurf({super.key});
@@ -16,10 +22,11 @@ class SignUpScreenTurf extends StatelessWidget {
   final TextEditingController numberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    log('Otp');
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        title: const Text('SignUp'),
+        title: Text(signUp),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -30,32 +37,31 @@ class SignUpScreenTurf extends StatelessWidget {
             Container(
               padding: pTRL20,
               child: Text(
-                "Create your ground !.. ",
+                createCommend,
                 style: mainTextG,
               ),
             ),
+
             FromField(
               bordercolor: Cgrey,
-              hint: 'Turfname',
-              validetmsg: 'Please Enter your Email',
-              controllers: nameController,
-            ),
-            FromField(
-              bordercolor: Cgrey,
-              hint: 'Email',
-              validetmsg: 'Please Enter your Email',
+              hint: emailText,
+              keytype: TextInputType.emailAddress,
+              validetmsg: emailTextCommend,
               controllers: emailController,
             ),
             FromField(
               bordercolor: Cgrey,
-              hint: 'Number',
-              validetmsg: 'Please Enter your Number',
+              hint: phoneText,
+              textleangthe: 10,
+              keytype: TextInputType.number,
+              validetmsg: phoneTextCommend,
               controllers: numberController,
             ),
             FromField(
               bordercolor: Cgrey,
-              hint: 'Password',
-              validetmsg: 'Please Enter your Password',
+              hint: passwordText,
+              textleangthe: 8,
+              validetmsg: passwordTextCommend,
               controllers: passwordController,
             ), //------------------------------------------------------fromend----------------------------------------
             Padding(
@@ -66,23 +72,26 @@ class SignUpScreenTurf extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => VerificationScreen(),
-                          ));
+                      Signup signup = Signup(
+                          email: emailController.text.trim(),
+                          mobile: int.parse(numberController.text.trim()));
+                      log('message');
+                      singupOtp(context, signup);
                     } else {}
                   },
                   style: signup,
-                  child: Text('SignUp', style: shortTextW),
+                  child: Text(signUp, style: shortTextW),
                 ),
               ),
-            ), //--------------------------------------------------------signupButton----------------------------------------------
+            ),
+
+            /*--------------------------------------------------------signupButton------------------------------------------------------*/
+
             Center(
                 child: Padding(
               padding: p10,
               child: Text(
-                'Or with',
+                or,
                 style: shortTextB,
               ),
             )),
@@ -94,20 +103,24 @@ class SignUpScreenTurf extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      return;
+                    } else {
+                      log('message//////////////////////');
                     }
                   },
                   style: google,
-                  child: Text('Sign Up with Google', style: shortTextB),
+                  child: Text(signgoogle, style: shortTextB),
                 ),
               ),
-            ), //----------------------------------------------------------GoogleSignUP---------------------------------------------------
+            ),
+
+            /*----------------------------------------------------------GoogleSignUP----------------------------------------------------------*/
+
             Cheight10,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Already have an account?',
+                  alreadyCommend,
                   style: shortTextB,
                 ),
                 Cwidth10,
@@ -120,7 +133,7 @@ class SignUpScreenTurf extends StatelessWidget {
                           ));
                     },
                     child: Text(
-                      'Login',
+                      login,
                       style: minTextG,
                     )),
               ],
@@ -129,5 +142,38 @@ class SignUpScreenTurf extends StatelessWidget {
         ),
       )),
     );
+  }
+
+  Future singupOtp(BuildContext context, Signup signup) async {
+    log('Sign up fn pressed');
+
+    // log(signup!.email.toString());
+    // log(signup.mobile.toString());
+    try {
+      log(signup.email);
+      final resp = await http.post(
+          Uri.parse(
+            otp,
+          ),
+          body: jsonEncode(signup.toJson()));
+
+      if (resp.statusCode == 200) {
+        log('hhshdfskhdscsh');
+        log(resp.body);
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => VerificationScreen()));
+      } else {
+        var snackBar = const SnackBar(
+          content: Text('Please enter valide entry'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    } catch (e) {
+      var snackBar = const SnackBar(
+        content: Text('Please check your data'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      log("$e");
+    }
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
+import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
 
-import '../../../util/from_filde.dart';
+import '../../../widget/from_filde.dart';
 
 class LoginScreenTurf extends StatelessWidget {
   LoginScreenTurf({super.key});
@@ -16,7 +17,7 @@ class LoginScreenTurf extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text(login),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -27,19 +28,19 @@ class LoginScreenTurf extends StatelessWidget {
             Container(
               padding: pTRL20,
               child: Text(
-                "Enter your ground !.. ",
+                enterCommend,
                 style: mainTextG,
               ),
             ),
             FromField(
-              hint: 'Email',
-              validetmsg: 'Please Enter your Email',
+              hint: emailText,
+              validetmsg: emailTextCommend,
               controllers: emailController,
               bordercolor: Cgrey,
             ),
             FromField(
-              hint: 'Password',
-              validetmsg: 'Please Enter your Password',
+              hint: passwordText,
+              validetmsg: passwordTextCommend,
               controllers: passwordController,
               bordercolor: Cgrey,
             ),
@@ -55,7 +56,7 @@ class LoginScreenTurf extends StatelessWidget {
                     }
                   },
                   style: signup,
-                  child: Text('Login', style: shortTextW),
+                  child: Text(login, style: shortTextW),
                 ),
               ),
             ),

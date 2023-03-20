@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../core/color.dart';
+import 'package:turf/core/color.dart';
+import 'package:turf/core/hard_text.dart';
 
 class OTPfrom extends StatelessWidget {
   const OTPfrom({
@@ -17,6 +17,7 @@ class OTPfrom extends StatelessWidget {
       height: 68,
       width: 62,
       child: TextFormField(
+        style: TextStyle(color: Cwhite),
         controller: controllers,
         onChanged: ((value) {
           if (value.length == 1) {
@@ -43,7 +44,7 @@ class OTPfrom extends StatelessWidget {
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please Enter a valu';
+            return valeCommend;
           } else {
             return null;
           }

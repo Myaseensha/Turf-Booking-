@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
-import 'package:turf/core/hardText.dart';
+import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/user/view/user_signup_screen.dart';
-import '../../../util/button.dart';
+import '../../../widget/button.dart';
 import '../../turfadd/view/turf_signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {

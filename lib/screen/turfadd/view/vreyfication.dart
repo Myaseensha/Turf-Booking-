@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:turf/core/h_w.dart';
+import 'package:turf/core/hard_text.dart';
 import 'package:turf/screen/turfadd/view/turfprofile_add.dart';
-
 import '../../../core/color.dart';
 import '../../../core/padding.dart';
-import '../../../util/otpfrom.dart';
+import '../../../widget/otpfrom.dart';
 
 class VerificationScreen extends StatelessWidget {
   VerificationScreen({super.key});
@@ -33,7 +33,7 @@ class VerificationScreen extends StatelessWidget {
               Container(
                 padding: pTRL20,
                 child: Text(
-                  "Enter your Verification Code ",
+                  verifyCode,
                   style: mainTextG,
                 ),
               ),
@@ -75,15 +75,15 @@ class VerificationScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                            context,
+                        Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (context) => const TurfProfileAdd(),
-                            ));
+                              builder: (context) => TurfProfileAdd(),
+                            ),
+                            (route) => false);
                       } else {}
                     },
                     style: signup,
-                    child: Text('Verify', style: shortTextW),
+                    child: Text(verify, style: shortTextW),
                   ),
                 ),
               )
