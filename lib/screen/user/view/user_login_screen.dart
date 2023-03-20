@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
+import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
 
-import '../../../util/from_filde.dart';
+import '../../../widget/from_filde.dart';
 
 class UserLoginScreen extends StatelessWidget {
   UserLoginScreen({super.key});
@@ -14,9 +15,9 @@ class UserLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: Cblack,
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text(login),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -27,21 +28,23 @@ class UserLoginScreen extends StatelessWidget {
             Container(
               padding: pTRL20,
               child: Text(
-                "Tap your ground !.. ",
+                tapCommend,
                 style: mainTextG,
               ),
             ),
             FromField(
-              hint: 'Email',
-              validetmsg: 'Please Enter your Email',
+              keytype: TextInputType.emailAddress,
+              hint: emailText,
+              validetmsg: emailTextCommend,
               controllers: emailController,
               bordercolor: Cwhite,
             ),
             FromField(
-              hint: 'Password',
-              validetmsg: 'Please Enter your Password',
+              hint: passwordText,
+              validetmsg: passwordTextCommend,
               controllers: passwordController,
               bordercolor: Cwhite,
+              keytype: TextInputType.visiblePassword,
             ),
             Padding(
               padding: pTRL20,
@@ -55,7 +58,7 @@ class UserLoginScreen extends StatelessWidget {
                     }
                   },
                   style: signup,
-                  child: Text('Login', style: shortTextW),
+                  child: Text(login, style: shortTextW),
                 ),
               ),
             ),

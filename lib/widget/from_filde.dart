@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:turf/core/color.dart';
 
 import '../core/padding.dart';
 
 class FromField extends StatelessWidget {
-  const FromField(
+  FromField(
       {Key? key,
       required this.hint,
+      this.keytype,
+      this.textleangthe,
       required this.validetmsg,
       required this.controllers,
       required this.bordercolor})
@@ -15,14 +18,19 @@ class FromField extends StatelessWidget {
   final String validetmsg;
   final TextEditingController controllers;
   final Color bordercolor;
+  TextInputType? keytype = TextInputType.name;
+  int? textleangthe = 30;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: pTRL20,
       child: TextFormField(
+        style: TextStyle(color: bordercolor),
+        inputFormatters: [LengthLimitingTextInputFormatter(textleangthe)],
         controller: controllers,
+        keyboardType: keytype,
         decoration: InputDecoration(
-          labelStyle: TextStyle(color: Cgreen),
+          labelStyle: TextStyle(color: bordercolor),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(

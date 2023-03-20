@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/screen/user/view/user_login_screen.dart';
 import 'package:turf/screen/user/view/vreyfication_screen.dart';
-import 'package:turf/util/from_filde.dart';
+import 'package:turf/widget/from_filde.dart';
 
 import '../../../core/h_w.dart';
+import '../../../core/hard_text.dart';
 import '../../../core/padding.dart';
 
 class SignUpScreenUser extends StatelessWidget {
@@ -12,13 +13,14 @@ class SignUpScreenUser extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: Cblack,
       appBar: AppBar(
-        title: const Text('SignUp'),
+        title: Text(signUp),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -29,25 +31,34 @@ class SignUpScreenUser extends StatelessWidget {
             Container(
               padding: pTRL30,
               child: Text(
-                "Find your  ground... ",
+                findText,
                 style: mainTextG,
               ),
             ),
             FromField(
-              hint: 'Name',
-              validetmsg: 'Please Enter your Number',
+              hint: nameText,
+              validetmsg: nameTextCommend,
               controllers: nameController,
               bordercolor: Cwhite,
+              keytype: TextInputType.name,
             ),
             FromField(
-              hint: 'Email',
-              validetmsg: 'Please Enter your Email',
+              hint: emailText,
+              validetmsg: emailTextCommend,
               controllers: emailController,
               bordercolor: Cwhite,
+              keytype: TextInputType.emailAddress,
             ),
             FromField(
-              hint: 'Password',
-              validetmsg: 'Please Enter your Password',
+              hint: phoneText,
+              validetmsg: phoneTextCommend,
+              controllers: phoneController,
+              bordercolor: Cwhite,
+              keytype: TextInputType.phone,
+            ),
+            FromField(
+              hint: passwordText,
+              validetmsg: passwordTextCommend,
               controllers: passwordController,
               bordercolor: Cwhite,
             ),
@@ -67,7 +78,7 @@ class SignUpScreenUser extends StatelessWidget {
                     }
                   },
                   style: signup,
-                  child: Text('SignUp', style: shortTextW),
+                  child: Text(signUp, style: shortTextW),
                 ),
               ),
             ), //--------------------------------------------------------signupButton----------------------------------------------
@@ -75,7 +86,7 @@ class SignUpScreenUser extends StatelessWidget {
                 child: Padding(
               padding: p10,
               child: Text(
-                'Or with',
+                or,
                 style: shortTextW,
               ),
             )),
@@ -91,7 +102,7 @@ class SignUpScreenUser extends StatelessWidget {
                     }
                   },
                   style: google,
-                  child: Text('Sign Up with Google', style: shortTextB),
+                  child: Text(signgoogle, style: shortTextB),
                 ),
               ),
             ), //----------------------------------------------------------GoogleSignUP---------------------------------------------------
@@ -100,7 +111,7 @@ class SignUpScreenUser extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Already have an account?',
+                  alreadyCommend,
                   style: shortTextW,
                 ),
                 Cwidth10,
@@ -113,7 +124,7 @@ class SignUpScreenUser extends StatelessWidget {
                         ));
                   },
                   child: Text(
-                    'Login',
+                    login,
                     style: minTextG,
                   ),
                 ),

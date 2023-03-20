@@ -15,6 +15,7 @@ class Button extends StatelessWidget {
   final Color colorB;
   final String title;
   final TextStyle style;
+  // ignore: prefer_typing_uninitialized_variables
   final classname;
   @override
   Widget build(BuildContext context) {

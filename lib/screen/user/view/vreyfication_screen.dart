@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:turf/core/h_w.dart';
-import 'package:turf/screen/turfadd/view/turfprofile_add.dart';
-import 'package:turf/screen/user/view/userhome_screen.dart';
+import 'package:turf/core/hard_text.dart';
+import 'package:turf/screen/user/view/turf_profile_screen.dart';
 
 import '../../../core/color.dart';
 import '../../../core/padding.dart';
-import '../../../util/otpfrom.dart';
+import '../../../widget/otpfrom.dart';
 
 class VerificationScreenUser extends StatelessWidget {
   VerificationScreenUser({super.key});
@@ -17,7 +17,7 @@ class VerificationScreenUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Cblack,
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
@@ -34,7 +34,7 @@ class VerificationScreenUser extends StatelessWidget {
               Container(
                 padding: pTRL20,
                 child: Text(
-                  "Enter your Verification Code ",
+                  verifyCode,
                   style: mainTextG,
                 ),
               ),
@@ -79,12 +79,12 @@ class VerificationScreenUser extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const UserHomeScreen(),
+                              builder: (context) => const TurfProfileSceen(),
                             ));
                       } else {}
                     },
                     style: signup,
-                    child: Text('Verify', style: shortTextW),
+                    child: Text(verify, style: shortTextW),
                   ),
                 ),
               )
