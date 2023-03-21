@@ -1,30 +1,30 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
-import 'package:turf/screen/turfadd/model/signup.dart';
+import 'package:turf/screen/turfadd/controller/turf_sign_funtion.dart';
 import 'package:turf/screen/turfadd/view/turf_login_screen.dart';
-import 'package:turf/screen/turfadd/view/vreyfication.dart';
-import 'package:http/http.dart' as http;
-import 'package:turf/utils/url.dart';
+
 import '../../../widget/from_filde.dart';
 
 class SignUpScreenTurf extends StatelessWidget {
   SignUpScreenTurf({super.key});
+
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController nameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController numberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     log('Otp');
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Cwhite,
       appBar: AppBar(
         title: Text(signUp),
         centerTitle: true,
@@ -34,6 +34,10 @@ class SignUpScreenTurf extends StatelessWidget {
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(children: [
+            Container(
+              height: mediaQuery.size.height * 0.35,
+              child: Lottie.asset('assets/Lottie/61182-ball-sport.json'),
+            ),
             Container(
               padding: pTRL20,
               child: Text(
@@ -57,13 +61,7 @@ class SignUpScreenTurf extends StatelessWidget {
               validetmsg: phoneTextCommend,
               controllers: numberController,
             ),
-            FromField(
-              bordercolor: Cgrey,
-              hint: passwordText,
-              textleangthe: 8,
-              validetmsg: passwordTextCommend,
-              controllers: passwordController,
-            ), //------------------------------------------------------fromend----------------------------------------
+            //------------------------------------------------------fromend----------------------------------------
             Padding(
               padding: pTRL20,
               child: SizedBox(
@@ -72,11 +70,10 @@ class SignUpScreenTurf extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Signup signup = Signup(
-                          email: emailController.text.trim(),
-                          mobile: int.parse(numberController.text.trim()));
                       log('message');
-                      singupOtp(context, signup);
+                      singupOtpGet(
+                          context, emailController.text, numberController.text);
+                      numbersave(numberController.text);
                     } else {}
                   },
                   style: signup,
@@ -87,33 +84,7 @@ class SignUpScreenTurf extends StatelessWidget {
 
             /*--------------------------------------------------------signupButton------------------------------------------------------*/
 
-            Center(
-                child: Padding(
-              padding: p10,
-              child: Text(
-                or,
-                style: shortTextB,
-              ),
-            )),
-            Padding(
-              padding: pRL40,
-              child: SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                    } else {
-                      log('message//////////////////////');
-                    }
-                  },
-                  style: google,
-                  child: Text(signgoogle, style: shortTextB),
-                ),
-              ),
-            ),
-
-            /*----------------------------------------------------------GoogleSignUP----------------------------------------------------------*/
+            /*----------------------------------------------------------login----------------------------------------------------------*/
 
             Cheight10,
             Row(
@@ -142,38 +113,5 @@ class SignUpScreenTurf extends StatelessWidget {
         ),
       )),
     );
-  }
-
-  Future singupOtp(BuildContext context, Signup signup) async {
-    log('Sign up fn pressed');
-
-    // log(signup!.email.toString());
-    // log(signup.mobile.toString());
-    try {
-      log(signup.email);
-      final resp = await http.post(
-          Uri.parse(
-            otp,
-          ),
-          body: jsonEncode(signup.toJson()));
-
-      if (resp.statusCode == 200) {
-        log('hhshdfskhdscsh');
-        log(resp.body);
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => VerificationScreen()));
-      } else {
-        var snackBar = const SnackBar(
-          content: Text('Please enter valide entry'),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    } catch (e) {
-      var snackBar = const SnackBar(
-        content: Text('Please check your data'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      log("$e");
-    }
   }
 }

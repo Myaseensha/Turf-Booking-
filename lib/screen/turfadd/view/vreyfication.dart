@@ -1,20 +1,26 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/hard_text.dart';
-import 'package:turf/screen/turfadd/view/turfprofile_add.dart';
+import 'package:turf/screen/turfadd/controller/turf_sign_funtion.dart';
+import 'package:turf/screen/turfadd/view/turf_signup_screen.dart';
+
 import '../../../core/color.dart';
 import '../../../core/padding.dart';
-import '../../../widget/otpfrom.dart';
+import '../../../widget/otp.dart';
 
 class VerificationScreen extends StatelessWidget {
-  VerificationScreen({super.key});
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController num1 = TextEditingController();
-  final TextEditingController num2 = TextEditingController();
-  final TextEditingController num3 = TextEditingController();
-  final TextEditingController num4 = TextEditingController();
+  final String number;
+  const VerificationScreen({
+    super.key,
+    required this.number,
+  });
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController? otpController;
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         body: SafeArea(
@@ -30,6 +36,19 @@ class VerificationScreen extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
+              Cheight20,
+              Pinput(
+                defaultPinTheme: defaultPinTheme,
+                focusedPinTheme: focusedPinTheme,
+                submittedPinTheme: submittedPinTheme,
+                onCompleted: (value) {
+                  {
+                    log(number);
+                    log('message/////////////////////////');
+                    sendOtp(context, value, number);
+                  }
+                },
+              ),
               Container(
                 padding: pTRL20,
                 child: Text(
@@ -38,55 +57,6 @@ class VerificationScreen extends StatelessWidget {
                 ),
               ),
               Cheight20,
-              Cheight20,
-              Form(
-                key: _formKey,
-                child: Padding(
-                  padding: pRL20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      OTPfrom(
-                        controllers: num1,
-                        colors: Cgrey,
-                      ),
-                      OTPfrom(
-                        controllers: num2,
-                        colors: Cgrey,
-                      ),
-                      OTPfrom(
-                        controllers: num3,
-                        colors: Cgrey,
-                      ),
-                      OTPfrom(
-                        controllers: num4,
-                        colors: Cgrey,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Cheight20,
-              Padding(
-                padding: pTRL20,
-                child: SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (context) => TurfProfileAdd(),
-                            ),
-                            (route) => false);
-                      } else {}
-                    },
-                    style: signup,
-                    child: Text(verify, style: shortTextW),
-                  ),
-                ),
-              )
             ],
           ),
         )));
