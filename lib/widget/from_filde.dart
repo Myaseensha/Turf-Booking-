@@ -25,12 +25,12 @@ class FromField extends StatelessWidget {
     return Padding(
       padding: pTRL20,
       child: TextFormField(
-        style: TextStyle(color: bordercolor),
+        style: TextStyle(color: Cgreen),
         inputFormatters: [LengthLimitingTextInputFormatter(textleangthe)],
         controller: controllers,
         keyboardType: keytype,
         decoration: InputDecoration(
-          labelStyle: TextStyle(color: bordercolor),
+          labelStyle: TextStyle(color: Cgreen),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(

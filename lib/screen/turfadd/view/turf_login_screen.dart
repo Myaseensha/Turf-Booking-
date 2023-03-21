@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
@@ -15,7 +16,7 @@ class LoginScreenTurf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Cwhite,
       appBar: AppBar(
         title: Text(login),
         centerTitle: true,
@@ -25,6 +26,9 @@ class LoginScreenTurf extends StatelessWidget {
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(children: [
+            Container(
+              child: Lottie.asset('name'),
+            ),
             Container(
               padding: pTRL20,
               child: Text(

@@ -1,19 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/screen/user/view/turf_profile_screen.dart';
+import 'package:turf/widget/otp.dart';
 
 import '../../../core/color.dart';
 import '../../../core/padding.dart';
-import '../../../widget/otpfrom.dart';
 
 class VerificationScreenUser extends StatelessWidget {
   VerificationScreenUser({super.key});
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController num1 = TextEditingController();
-  final TextEditingController num2 = TextEditingController();
-  final TextEditingController num3 = TextEditingController();
-  final TextEditingController num4 = TextEditingController();
+
+  final TextEditingController otpController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,34 +41,12 @@ class VerificationScreenUser extends StatelessWidget {
               ),
               Cheight20,
               Cheight20,
-              Form(
-                key: _formKey,
-                child: Padding(
-                  padding: pRL20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      OTPfrom(
-                        controllers: num1,
-                        colors: Cgreen,
-                      ),
-                      OTPfrom(
-                        controllers: num2,
-                        colors: Cgreen,
-                      ),
-                      OTPfrom(
-                        controllers: num3,
-                        colors: Cgreen,
-                      ),
-                      OTPfrom(
-                        controllers: num4,
-                        colors: Cgreen,
-                      ),
-                    ],
-                  ),
-                ),
+              Pinput(
+                controller: otpController,
+                defaultPinTheme: defaultPinTheme,
+                focusedPinTheme: focusedPinTheme,
+                submittedPinTheme: submittedPinTheme,
               ),
-              Cheight20,
               Padding(
                 padding: pTRL20,
                 child: SizedBox(
@@ -75,13 +54,11 @@ class VerificationScreenUser extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const TurfProfileSceen(),
-                            ));
-                      } else {}
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TurfProfileSceen(),
+                          ));
                     },
                     style: signup,
                     child: Text(verify, style: shortTextW),
