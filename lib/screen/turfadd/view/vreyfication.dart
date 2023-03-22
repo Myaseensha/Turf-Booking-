@@ -20,7 +20,6 @@ class VerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController? otpController;
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         body: SafeArea(

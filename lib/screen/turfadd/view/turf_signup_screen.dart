@@ -34,7 +34,7 @@ class SignUpScreenTurf extends StatelessWidget {
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(children: [
-            Container(
+            SizedBox(
               height: mediaQuery.size.height * 0.35,
               child: Lottie.asset('assets/Lottie/61182-ball-sport.json'),
             ),
@@ -70,10 +70,9 @@ class SignUpScreenTurf extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      log('message');
+                      log('validte and get otp function');
                       singupOtpGet(
                           context, emailController.text, numberController.text);
-                      numbersave(numberController.text);
                     } else {}
                   },
                   style: signup,
