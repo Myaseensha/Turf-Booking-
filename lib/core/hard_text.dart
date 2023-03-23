@@ -14,7 +14,9 @@ String nameText = 'Name';
 String phoneText = 'Phone';
 String emailText = 'Email';
 String login = 'Login';
-String or = 'Or with';
+String otpText = 'Enter OTP';
+String otpCommend =
+    'We have sent you access code Via SMS for mobile number verification';
 String passwordText = 'Password';
 String nameTextCommend = 'Please Enter your Name';
 String phoneTextCommend = 'Please Enter your Password';
@@ -29,3 +31,5 @@ String createCommend = "Create your ground !.. ";
 String findText = "Find your  ground... ";
 String enterCommend = "Enter your ground !.. ";
 String tapCommend = "Tap your ground !.. ";
+String dont = """Didn't Receive the OTP ?""";
+String resendCode = 'Resend Code';

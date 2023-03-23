@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
+import 'package:turf/core/h_w.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/user/view/user_signup_screen.dart';
@@ -15,6 +16,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: SafeArea(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
             height: 300,
@@ -45,9 +47,10 @@ class LoginScreen extends StatelessWidget {
             colorB: Cwhite,
             colorF: Cgreen,
             title: 'To Book Avenue',
-            style: shortTextB,
+            style: shortTextBlack,
             classname: SignUpScreenUser(),
           ),
+          Cheight10
         ],
       )),
     );

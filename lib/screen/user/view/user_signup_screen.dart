@@ -27,110 +27,89 @@ class SignUpScreenUser extends StatelessWidget {
           child: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          child: Column(children: [
-            Container(
-              padding: pTRL30,
-              child: Text(
-                findText,
-                style: mainTextG,
-              ),
-            ),
-            FromField(
-              hint: nameText,
-              validetmsg: nameTextCommend,
-              controllers: nameController,
-              bordercolor: Cwhite,
-              keytype: TextInputType.name,
-            ),
-            FromField(
-              hint: emailText,
-              validetmsg: emailTextCommend,
-              controllers: emailController,
-              bordercolor: Cwhite,
-              keytype: TextInputType.emailAddress,
-            ),
-            FromField(
-              hint: phoneText,
-              validetmsg: phoneTextCommend,
-              controllers: phoneController,
-              bordercolor: Cwhite,
-              keytype: TextInputType.phone,
-            ),
-            FromField(
-              hint: passwordText,
-              validetmsg: passwordTextCommend,
-              controllers: passwordController,
-              bordercolor: Cwhite,
-            ),
-            Padding(
-              padding: pTRL20,
-              child: SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => VerificationScreenUser(),
-                          ));
-                    }
-                  },
-                  style: signup,
-                  child: Text(signUp, style: shortTextW),
-                ),
-              ),
-            ), //--------------------------------------------------------signupButton----------------------------------------------
-            Center(
-                child: Padding(
-              padding: p10,
-              child: Text(
-                or,
-                style: shortTextW,
-              ),
-            )),
-            Padding(
-              padding: pRL40,
-              child: SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      return;
-                    }
-                  },
-                  style: google,
-                  child: Text(signgoogle, style: shortTextB),
-                ),
-              ),
-            ), //----------------------------------------------------------GoogleSignUP---------------------------------------------------
-            Cheight20,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  alreadyCommend,
-                  style: shortTextW,
-                ),
-                Cwidth10,
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UserLoginScreen(),
-                        ));
-                  },
+                Container(
+                  padding: pTRL30,
                   child: Text(
-                    login,
-                    style: minTextG,
+                    findText,
+                    style: mainTextG,
                   ),
                 ),
-              ],
-            ),
-          ]),
+                FromField(
+                  hint: nameText,
+                  validetmsg: nameTextCommend,
+                  controllers: nameController,
+                  bordercolor: Cwhite,
+                  keytype: TextInputType.name,
+                ),
+                FromField(
+                  hint: emailText,
+                  validetmsg: emailTextCommend,
+                  controllers: emailController,
+                  bordercolor: Cwhite,
+                  keytype: TextInputType.emailAddress,
+                ),
+                FromField(
+                  hint: phoneText,
+                  validetmsg: phoneTextCommend,
+                  controllers: phoneController,
+                  bordercolor: Cwhite,
+                  keytype: TextInputType.phone,
+                ),
+                FromField(
+                  hint: passwordText,
+                  validetmsg: passwordTextCommend,
+                  controllers: passwordController,
+                  bordercolor: Cwhite,
+                ),
+                Padding(
+                  padding: pTRL20,
+                  child: SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VerificationScreenUser(),
+                              ));
+                        }
+                      },
+                      style: signup,
+                      child: Text(signUp, style: shortTextW),
+                    ),
+                  ),
+                ), //--------------------------------------------------------signupButton----------------------------------------------
+
+                Cheight20,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      alreadyCommend,
+                      style: shortTextW,
+                    ),
+                    Cwidth10,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserLoginScreen(),
+                            ));
+                      },
+                      child: Text(
+                        login,
+                        style: minTextG,
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
         ),
       )),
     );
