@@ -16,9 +16,14 @@ TextStyle shortTextW = const TextStyle(
   fontWeight: FontWeight.w700,
   fontSize: 15,
 );
-TextStyle shortTextB = const TextStyle(
+TextStyle shortTextBlack = const TextStyle(
   color: Color.fromARGB(255, 0, 0, 0),
   fontWeight: FontWeight.w700,
+  fontSize: 15,
+);
+TextStyle shortTextBS = const TextStyle(
+  color: Color.fromARGB(255, 0, 0, 0),
+  fontWeight: FontWeight.w400,
   fontSize: 15,
 );
 ButtonStyle signup = ElevatedButton.styleFrom(
