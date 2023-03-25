@@ -15,7 +15,7 @@ class TurfProfile extends StatelessWidget {
           return Stack(children: [
             Container(
               height: maxHeight / 3,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/image/artificial_turf_nw.webp'),
                   fit: BoxFit.cover,
@@ -33,7 +33,7 @@ class TurfProfile extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: maxHeight * 0.090,
-                    backgroundImage: AssetImage('assets/image/th (7).webp'),
+                    backgroundImage: const AssetImage('assets/image/th (7).webp'),
                   ),
                   SizedBox(height: maxHeight * 0.02),
                   Text(
@@ -44,13 +44,13 @@ class TurfProfile extends StatelessWidget {
                     ),
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.location_on),
                       Text('Malappuram, Kerala'),
                     ],
                   ),
                   SizedBox(height: maxHeight * 0.03),
-                  TabBar(
+                  const TabBar(
                     tabs: [
                       Tab(text: 'Dashboard'),
                       Tab(text: 'New Post'),
@@ -68,38 +68,38 @@ class TurfProfile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Column(
-                                  children: [
+                                  children: const [
                                     Text('Booked'),
                                     Text('10'),
                                   ],
                                 ),
                                 Column(
-                                  children: [
+                                  children: const [
                                     Text('Cancel'),
                                     Text('2'),
                                   ],
                                 ),
                                 Column(
-                                  children: [
+                                  children: const [
                                     Text('Total Renew'),
                                     Text('20'),
                                   ],
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Expanded(
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: DataTable(
-                                  columns: [
+                                  columns: const [
                                     DataColumn(label: Text('Turf Date')),
                                     DataColumn(
                                         label: Text('Total Working Hours')),
                                     DataColumn(label: Text('Collections')),
                                     DataColumn(label: Text('Profit')),
                                   ],
-                                  rows: [
+                                  rows: const [
                                     DataRow(cells: [
                                       DataCell(Text('Jan 1, 2023')),
                                       DataCell(Text('4')),
@@ -124,7 +124,7 @@ class TurfProfile extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Center(
+                        const Center(
                           child: Text('New Post'),
                         ),
                       ],
