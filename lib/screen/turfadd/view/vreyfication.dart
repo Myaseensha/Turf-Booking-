@@ -5,18 +5,22 @@ import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/hard_text.dart';
-import 'package:turf/screen/turfadd/controller/turf_add_funtion.dart';
-import 'package:turf/screen/turfadd/view/turf_signup_screen.dart';
 
 import '../../../core/color.dart';
 import '../../../core/padding.dart';
 import '../../../widget/otp.dart';
+import '../controller/turf_resend_otp.dart';
+import '../controller/turf_verify.dart';
 
 class VerificationScreen extends StatelessWidget {
   final String number;
+  final String email;
+  final String password;
   const VerificationScreen({
     super.key,
     required this.number,
+    required this.email,
+    required this.password,
   });
 
   @override
@@ -34,7 +38,7 @@ class VerificationScreen extends StatelessWidget {
               child: Lottie.asset(
                   "assets/Lottie/105173-verification-code-otp.json"),
             ),
-            Cheight20,
+            conHeight20,
             Pinput(
               defaultPinTheme: defaultPinTheme,
               focusedPinTheme: focusedPinTheme,
@@ -43,18 +47,18 @@ class VerificationScreen extends StatelessWidget {
                 {
                   log(number);
                   log('message/////////////////////////');
-                  sendOTP(context, value, number);
+                  sendOTP(context, value, number, email, password);
                 }
               },
             ),
-            Cheight20,
+            conHeight20,
             Center(
               child: Text(
                 otpText,
                 style: minTextG,
               ),
             ),
-            Cheight20,
+            conHeight20,
             Center(
               child: Container(
                 padding: pRL30,
@@ -65,12 +69,12 @@ class VerificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Cheight20,
+            conHeight20,
             Text(
               dont,
               style: shortTextBlack,
             ),
-            Cheight10,
+            conHeight10,
             GestureDetector(
                 onTap: () {
                   resendOTP(context, number);

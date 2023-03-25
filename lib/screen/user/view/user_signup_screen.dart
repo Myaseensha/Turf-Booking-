@@ -18,7 +18,7 @@ class SignUpScreenUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cblack,
+      backgroundColor: conBlack,
       appBar: AppBar(
         title: Text(signUp),
         centerTitle: true,
@@ -41,28 +41,28 @@ class SignUpScreenUser extends StatelessWidget {
                   hint: nameText,
                   validetmsg: nameTextCommend,
                   controllers: nameController,
-                  bordercolor: Cwhite,
+                  bordercolor: conWhite,
                   keytype: TextInputType.name,
                 ),
                 FromField(
                   hint: emailText,
                   validetmsg: emailTextCommend,
                   controllers: emailController,
-                  bordercolor: Cwhite,
+                  bordercolor: conWhite,
                   keytype: TextInputType.emailAddress,
                 ),
                 FromField(
                   hint: phoneText,
                   validetmsg: phoneTextCommend,
                   controllers: phoneController,
-                  bordercolor: Cwhite,
+                  bordercolor: conWhite,
                   keytype: TextInputType.phone,
                 ),
                 FromField(
                   hint: passwordText,
                   validetmsg: passwordTextCommend,
                   controllers: passwordController,
-                  bordercolor: Cwhite,
+                  bordercolor: conWhite,
                 ),
                 Padding(
                   padding: pTRL20,
@@ -85,7 +85,7 @@ class SignUpScreenUser extends StatelessWidget {
                   ),
                 ), //--------------------------------------------------------signupButton----------------------------------------------
 
-                Cheight20,
+                conHeight20,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -93,7 +93,7 @@ class SignUpScreenUser extends StatelessWidget {
                       alreadyCommend,
                       style: shortTextW,
                     ),
-                    Cwidth10,
+                    conWidth10,
                     GestureDetector(
                       onTap: () {
                         Navigator.push(

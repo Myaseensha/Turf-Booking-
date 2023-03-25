@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/h_w.dart';
@@ -11,7 +9,7 @@ class TurfProfileSceen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cblack,
+      backgroundColor: conBlack,
       body: SafeArea(
         child: ListView.separated(
           itemCount: 15,
@@ -22,7 +20,7 @@ class TurfProfileSceen extends StatelessWidget {
                 alignment: Alignment.center,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Cwhite,
+                  color: conWhite,
                   borderRadius: const BorderRadius.horizontal(
                     left: Radius.circular(60),
                   ),
@@ -32,7 +30,7 @@ class TurfProfileSceen extends StatelessWidget {
                     'Club One',
                     style: minTextG,
                   ),
-                  leading: CircleAvatar(
+                  leading: const CircleAvatar(
                       radius: 50,
                       backgroundImage: AssetImage('assets/image/th (7).webp')),
                 ),
@@ -40,7 +38,7 @@ class TurfProfileSceen extends StatelessWidget {
             );
           },
           separatorBuilder: (context, index) {
-            return Cheight10;
+            return conHeight10;
           },
         ),
       ),

@@ -10,16 +10,16 @@ final defaultPinTheme = PinTheme(
       color: Color.fromRGBO(30, 60, 87, 1),
       fontWeight: FontWeight.w600),
   decoration: BoxDecoration(
-    border: Border.all(color: Cgrey),
+    border: Border.all(color: conGrey),
     borderRadius: BorderRadius.circular(20),
   ),
 );
 
 final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-  border: Border.all(color: Cgreen),
+  border: Border.all(color: conGreen),
   borderRadius: BorderRadius.circular(8),
 );
 
 final submittedPinTheme = defaultPinTheme.copyWith(
-  decoration: defaultPinTheme.decoration!.copyWith(color: Cgrey),
+  decoration: defaultPinTheme.decoration!.copyWith(color: conGrey),
 );

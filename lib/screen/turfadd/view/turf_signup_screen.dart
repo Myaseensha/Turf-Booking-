@@ -6,7 +6,7 @@ import 'package:turf/core/color.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
-import 'package:turf/screen/turfadd/controller/turf_add_funtion.dart';
+import 'package:turf/screen/turfadd/controller/turf_getotp.dart';
 import 'package:turf/screen/turfadd/view/turf_login_screen.dart';
 
 import '../../../widget/from_filde.dart';
@@ -17,14 +17,15 @@ class SignUpScreenTurf extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final TextEditingController emailController = TextEditingController();
-
+  final TextEditingController turfnameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController numberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     log('Otp');
     return Scaffold(
-      backgroundColor: Cwhite,
+      backgroundColor: conWhite,
       appBar: AppBar(
         title: Text(signUp),
         centerTitle: true,
@@ -37,7 +38,7 @@ class SignUpScreenTurf extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  height: mediaQuery.size.height * 0.35,
+                  height: mediaQuery.size.height * 0.25,
                   child: Lottie.asset('assets/Lottie/61182-ball-sport.json'),
                 ),
                 Container(
@@ -47,21 +48,34 @@ class SignUpScreenTurf extends StatelessWidget {
                     style: mainTextG,
                   ),
                 ),
-
                 FromField(
-                  bordercolor: Cgrey,
+                  bordercolor: conGrey,
+                  hint: turfnameText,
+                  validetmsg: nameTextCommend,
+                  controllers: turfnameController,
+                ),
+                FromField(
+                  bordercolor: conGrey,
                   hint: emailText,
                   keytype: TextInputType.emailAddress,
                   validetmsg: emailTextCommend,
                   controllers: emailController,
                 ),
                 FromField(
-                  bordercolor: Cgrey,
+                  bordercolor: conGrey,
                   hint: phoneText,
                   textleangthe: 10,
                   keytype: TextInputType.number,
                   validetmsg: phoneTextCommend,
                   controllers: numberController,
+                ),
+                FromField(
+                  bordercolor: conGrey,
+                  hint: passwordText,
+                  textleangthe: 10,
+                  keytype: TextInputType.visiblePassword,
+                  validetmsg: passwordTextCommend,
+                  controllers: passwordController,
                 ),
                 //------------------------------------------------------from end----------------------------------------
                 Padding(
@@ -73,11 +87,8 @@ class SignUpScreenTurf extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           log('validte and get otp function');
-                          signUpInfo(
-                            context,
-                            emailController.text,
-                            numberController.text,
-                          );
+                          signUpInfo(context, emailController.text,
+                              numberController.text, passwordController.text);
                         } else {}
                       },
                       style: signup,
@@ -88,7 +99,7 @@ class SignUpScreenTurf extends StatelessWidget {
 
                 /*----------------------------------------------------------login----------------------------------------------------------*/
 
-                Cheight10,
+                conHeight10,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -96,7 +107,7 @@ class SignUpScreenTurf extends StatelessWidget {
                       alreadyCommend,
                       style: shortTextBlack,
                     ),
-                    Cwidth10,
+                    conWidth10,
                     GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -111,6 +122,7 @@ class SignUpScreenTurf extends StatelessWidget {
                         )),
                   ],
                 ),
+                conHeight20,
               ]),
         ),
       )),

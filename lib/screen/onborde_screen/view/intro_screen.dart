@@ -37,20 +37,20 @@ class LoginScreen extends StatelessWidget {
             child: Text(short, style: shortTextW),
           ),
           Button(
-            colorB: Cgreen,
-            colorF: Cblack,
+            colorB: conGreen,
+            colorF: conBlack,
             title: 'To Get Listed',
             style: shortTextW,
             classname: SignUpScreenTurf(),
           ),
           Button(
-            colorB: Cwhite,
-            colorF: Cgreen,
+            colorB: conWhite,
+            colorF: conGreen,
             title: 'To Book Avenue',
             style: shortTextBlack,
             classname: SignUpScreenUser(),
           ),
-          Cheight10
+          conHeight10
         ],
       )),
     );

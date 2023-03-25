@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
-const Cheight10 = SizedBox(
+const conHeight10 = SizedBox(
   height: 10,
 );
-const Cheight20 = SizedBox(
+const conHeight20 = SizedBox(
   height: 20,
 );
-const Cwidth10 = SizedBox(
+const conWidth10 = SizedBox(
   width: 10,
 );
-const Cwidth20 = SizedBox(
+const conWidth20 = SizedBox(
   width: 20,
 );

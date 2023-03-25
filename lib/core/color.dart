@@ -27,25 +27,25 @@ TextStyle shortTextBS = const TextStyle(
   fontSize: 15,
 );
 ButtonStyle signup = ElevatedButton.styleFrom(
-  foregroundColor: Cwhite,
-  backgroundColor: Cgreen,
+  foregroundColor: conWhite,
+  backgroundColor: conGreen,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(40),
   ),
   elevation: 5.0,
 );
 ButtonStyle google = ElevatedButton.styleFrom(
-  foregroundColor: Cgreen,
-  backgroundColor: Cwhite,
+  foregroundColor: conGreen,
+  backgroundColor: conWhite,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(40),
   ),
   elevation: 5.0,
 );
 //color-------------------------------------------
-Color Cgreen = Colors.green.shade700;
-Color Cwhite = Colors.white;
-Color Cblack = Colors.black;
-Color Cgrey = Colors.black26;
-MaterialColor? CMgeree =
+Color conGreen = Colors.green.shade700;
+Color conWhite = Colors.white;
+Color conBlack = Colors.black;
+Color conGrey = Colors.black26;
+MaterialColor? conMgeree =
     const Color.fromARGB(255, 30, 243, 37) as MaterialColor?;

@@ -15,7 +15,7 @@ class UserLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cblack,
+      backgroundColor: conBlack,
       appBar: AppBar(
         title: Text(login),
         centerTitle: true,
@@ -37,13 +37,13 @@ class UserLoginScreen extends StatelessWidget {
               hint: emailText,
               validetmsg: emailTextCommend,
               controllers: emailController,
-              bordercolor: Cwhite,
+              bordercolor: conWhite,
             ),
             FromField(
               hint: passwordText,
               validetmsg: passwordTextCommend,
               controllers: passwordController,
-              bordercolor: Cwhite,
+              bordercolor: conWhite,
               keytype: TextInputType.visiblePassword,
             ),
             Padding(

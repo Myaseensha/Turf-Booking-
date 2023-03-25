@@ -16,7 +16,7 @@ class LoginScreenTurf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cwhite,
+      backgroundColor: conWhite,
       appBar: AppBar(
         title: Text(login),
         centerTitle: true,
@@ -40,13 +40,13 @@ class LoginScreenTurf extends StatelessWidget {
               hint: emailText,
               validetmsg: emailTextCommend,
               controllers: emailController,
-              bordercolor: Cgrey,
+              bordercolor: conGrey,
             ),
             FromField(
               hint: passwordText,
               validetmsg: passwordTextCommend,
               controllers: passwordController,
-              bordercolor: Cgrey,
+              bordercolor: conGrey,
             ),
             Padding(
               padding: pTRL20,

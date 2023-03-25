@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:turf/core/h_w.dart';
@@ -18,7 +16,7 @@ class VerificationScreenUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Cblack,
+        backgroundColor: conBlack,
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
@@ -39,8 +37,8 @@ class VerificationScreenUser extends StatelessWidget {
                   style: mainTextG,
                 ),
               ),
-              Cheight20,
-              Cheight20,
+              conHeight20,
+              conHeight20,
               Pinput(
                 controller: otpController,
                 defaultPinTheme: defaultPinTheme,
