@@ -4,6 +4,7 @@ import 'package:turf/core/color.dart';
 
 import '../core/padding.dart';
 
+// ignore: must_be_immutable
 class FromField extends StatelessWidget {
   FromField(
       {Key? key,
@@ -18,19 +19,19 @@ class FromField extends StatelessWidget {
   final String validetmsg;
   final TextEditingController controllers;
   final Color bordercolor;
-  TextInputType? keytype = TextInputType.name;
+  late TextInputType? keytype = TextInputType.name;
   int? textleangthe = 30;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: pTRL20,
       child: TextFormField(
-        style: TextStyle(color: Cgreen),
+        style: TextStyle(color: conGreen),
         inputFormatters: [LengthLimitingTextInputFormatter(textleangthe)],
         controller: controllers,
         keyboardType: keytype,
         decoration: InputDecoration(
-          labelStyle: TextStyle(color: Cgreen),
+          labelStyle: TextStyle(color: conGreen),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(
