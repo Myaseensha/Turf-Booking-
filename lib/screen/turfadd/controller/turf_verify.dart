@@ -7,7 +7,7 @@ import '../../../utils/url.dart';
 import '../view/turfprofile_add.dart';
 
 Future<void> sendOTP(BuildContext context, String verifyotp, String mobile,
-    String email, String password) async {
+    String email, String password, String courtname) async {
   final otpSend = {'otp': verifyotp, 'mobile': mobile};
   final headers = {'Content-Type': 'application/json'};
 
@@ -17,13 +17,18 @@ Future<void> sendOTP(BuildContext context, String verifyotp, String mobile,
   if (response.statusCode == 200) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-          builder: (context) =>
-              TurfProfileAdd(email: email, mobile: mobile, password: password)),
+          builder: (context) => TurfProfileAdd(
+                email: email,
+                mobile: mobile,
+                password: password,
+                courtName: courtname,
+              )),
       (route) => false,
     );
   } else if (response.statusCode == 400) {
     const snackBar = SnackBar(content: Text('Invalid Otp Please enter again'));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    return;
   } else {
     const snackBar = SnackBar(content: Text('Please check your data'));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);

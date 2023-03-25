@@ -10,7 +10,7 @@ class CourtAdd {
   final String state;
   final String event;
   final String locationDetails;
-  final File imageFile;
+  final List<File> imageFiles;
 
   CourtAdd({
     required this.courtName,
@@ -22,7 +22,7 @@ class CourtAdd {
     required this.state,
     required this.event,
     required this.locationDetails,
-    required this.imageFile,
+    required this.imageFiles,
   });
 
   factory CourtAdd.fromJson(Map<String, dynamic> json) {
@@ -36,7 +36,8 @@ class CourtAdd {
       state: json['state'],
       event: json['event'],
       locationDetails: json['locationDetails'],
-      imageFile: File(json['imageFilePath']),
+      imageFiles:
+          List<File>.from(json['imageFilePaths'].map((path) => File(path))),
     );
   }
 
@@ -50,6 +51,7 @@ class CourtAdd {
         'state': state,
         'event': event,
         'locationDetails': locationDetails,
-        'imageFilePath': imageFile.path,
+        'imageFilePaths':
+            List<dynamic>.from(imageFiles.map((file) => file.path)),
       };
 }

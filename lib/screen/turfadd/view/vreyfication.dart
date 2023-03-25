@@ -16,12 +16,13 @@ class VerificationScreen extends StatelessWidget {
   final String number;
   final String email;
   final String password;
-  const VerificationScreen({
-    super.key,
-    required this.number,
-    required this.email,
-    required this.password,
-  });
+  final String courtname;
+  const VerificationScreen(
+      {super.key,
+      required this.number,
+      required this.email,
+      required this.password,
+      required this.courtname});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class VerificationScreen extends StatelessWidget {
                 {
                   log(number);
                   log('message/////////////////////////');
-                  sendOTP(context, value, number, email, password);
+                  sendOTP(context, value, number, email, password, courtname);
                 }
               },
             ),

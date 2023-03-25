@@ -13,7 +13,7 @@ import '../../../widget/from_filde.dart';
 
 class SignUpScreenTurf extends StatelessWidget {
   SignUpScreenTurf({super.key});
-
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final TextEditingController emailController = TextEditingController();
@@ -25,6 +25,7 @@ class SignUpScreenTurf extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
     log('Otp');
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: conWhite,
       appBar: AppBar(
         title: Text(signUp),
@@ -87,8 +88,12 @@ class SignUpScreenTurf extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           log('validte and get otp function');
-                          signUpInfo(context, emailController.text,
-                              numberController.text, passwordController.text);
+                          signUpInfo(
+                              context,
+                              emailController.text,
+                              numberController.text,
+                              passwordController.text,
+                              turfnameController.text);
                         } else {}
                       },
                       style: signup,
