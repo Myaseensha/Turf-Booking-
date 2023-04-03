@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turf/core/h_w.dart';
 
 class TurfProfile extends StatelessWidget {
   const TurfProfile({super.key});
@@ -33,7 +34,8 @@ class TurfProfile extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: maxHeight * 0.090,
-                    backgroundImage: const AssetImage('assets/image/th (7).webp'),
+                    backgroundImage:
+                        const AssetImage('assets/image/th (7).webp'),
                   ),
                   SizedBox(height: maxHeight * 0.02),
                   Text(
@@ -47,7 +49,31 @@ class TurfProfile extends StatelessWidget {
                     children: const [
                       Icon(Icons.location_on),
                       Text('Malappuram, Kerala'),
+                      conWidth20,
                     ],
+                  ),
+                  SizedBox(
+                    width: maxWidth,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          side: const BorderSide(
+                            color: Colors.black,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Edit Profile',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(height: maxHeight * 0.03),
                   const TabBar(

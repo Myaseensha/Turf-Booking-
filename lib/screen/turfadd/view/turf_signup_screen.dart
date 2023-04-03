@@ -88,7 +88,7 @@ class SignUpScreenTurf extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           log('validte and get otp function');
-                          signUpInfo(
+                          signupinfo(
                               context,
                               emailController.text,
                               numberController.text,

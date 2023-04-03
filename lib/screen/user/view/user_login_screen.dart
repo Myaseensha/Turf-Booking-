@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
+import 'package:turf/screen/user/controller/user_login.dart';
 
 import '../../../widget/from_filde.dart';
 
@@ -44,7 +45,6 @@ class UserLoginScreen extends StatelessWidget {
               validetmsg: passwordTextCommend,
               controllers: passwordController,
               bordercolor: conWhite,
-              keytype: TextInputType.visiblePassword,
             ),
             Padding(
               padding: pTRL20,
@@ -54,7 +54,8 @@ class UserLoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      return;
+                      userlogi(passwordController.text, emailController.text,
+                          context);
                     }
                   },
                   style: signup,

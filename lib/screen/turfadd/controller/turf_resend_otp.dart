@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/url.dart';
+import '../utils/url.dart';
 
 Future<void> resendOTP(BuildContext context, String mobile) async {
   final otpSend = {'mobile': mobile};

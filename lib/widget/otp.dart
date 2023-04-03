@@ -23,3 +23,23 @@ final focusedPinTheme = defaultPinTheme.copyDecorationWith(
 final submittedPinTheme = defaultPinTheme.copyWith(
   decoration: defaultPinTheme.decoration!.copyWith(color: conGrey),
 );
+final defaultPinThemeGreen = PinTheme(
+  width: 56,
+  height: 56,
+  textStyle: const TextStyle(
+      fontSize: 20,
+      color: Color.fromRGBO(111, 174, 230, 1),
+      fontWeight: FontWeight.w600),
+  decoration: BoxDecoration(
+    border: Border.all(color: conGreen),
+    borderRadius: BorderRadius.circular(20),
+  ),
+);
+final focusedPinThemeGreen = defaultPinTheme.copyDecorationWith(
+  border: Border.all(color: conWhite),
+  borderRadius: BorderRadius.circular(8),
+);
+
+final submittedPinThemeGreen = defaultPinTheme.copyWith(
+  decoration: defaultPinTheme.decoration!.copyWith(color: conGreen),
+);

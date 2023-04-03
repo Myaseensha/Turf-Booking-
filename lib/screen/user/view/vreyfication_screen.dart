@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/hard_text.dart';
-import 'package:turf/screen/user/view/turf_profile_screen.dart';
+import 'package:turf/screen/user/controller/otp_check.dart';
+import 'package:turf/screen/user/controller/otp_resend.dart';
 import 'package:turf/widget/otp.dart';
 
 import '../../../core/color.dart';
 import '../../../core/padding.dart';
 
 class VerificationScreenUser extends StatelessWidget {
-  VerificationScreenUser({super.key});
-
-  final TextEditingController otpController = TextEditingController();
-
+  const VerificationScreenUser(
+      this.email, this.mobile, this.name, this.password,
+      {super.key});
+  final String email;
+  final String mobile;
+  final String password;
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,29 +44,45 @@ class VerificationScreenUser extends StatelessWidget {
               conHeight20,
               conHeight20,
               Pinput(
-                controller: otpController,
-                defaultPinTheme: defaultPinTheme,
-                focusedPinTheme: focusedPinTheme,
-                submittedPinTheme: submittedPinTheme,
+                defaultPinTheme: defaultPinThemeGreen,
+                focusedPinTheme: focusedPinThemeGreen,
+                submittedPinTheme: submittedPinThemeGreen,
+                onCompleted: (value) {
+                  verifyotp(mobile, value, password, name, email, context);
+                },
               ),
-              Padding(
-                padding: pTRL20,
-                child: SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TurfProfileSceen(),
-                          ));
-                    },
-                    style: signup,
-                    child: Text(verify, style: shortTextW),
+              conHeight20,
+              Center(
+                child: Text(
+                  otpText,
+                  style: minTextG,
+                ),
+              ),
+              conHeight20,
+              Center(
+                child: Container(
+                  padding: pRL30,
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    otpCommend,
+                    style: shortTextBS,
                   ),
                 ),
-              )
+              ),
+              conHeight20,
+              Text(
+                dont,
+                style: shortTextBlack,
+              ),
+              conHeight10,
+              GestureDetector(
+                  onTap: () {
+                    resendotp(mobile, context);
+                  },
+                  child: Text(
+                    resendCode,
+                    style: minTextG,
+                  )),
             ],
           ),
         )));

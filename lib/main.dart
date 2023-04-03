@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             textTheme: const TextTheme(displayLarge: TextStyle()),
             primarySwatch: Colors.green,
             appBarTheme: AppBarTheme(color: conGreen)),
-        home: const LoginScreen(),
+        home: const IntroScreen(),
       ),
     );
   }
