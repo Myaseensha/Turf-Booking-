@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turf/core/color.dart';
+import 'package:turf/screen/onborde_screen/splash_screen.dart';
 import 'package:turf/screen/onborde_screen/view/intro_screen.dart';
 import 'package:turf/screen/turfadd/controller/image_provider.dart';
 
@@ -20,13 +21,12 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            textTheme: const TextTheme(displayLarge: TextStyle()),
-            primarySwatch: Colors.green,
-            appBarTheme: AppBarTheme(color: conGreen)),
-        home: const IntroScreen(),
-      ),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              textTheme: const TextTheme(displayLarge: TextStyle()),
+              primarySwatch: Colors.green,
+              appBarTheme: AppBarTheme(color: conGreen)),
+          home: const SplashScreen()),
     );
   }
 }

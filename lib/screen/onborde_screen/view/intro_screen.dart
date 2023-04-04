@@ -12,15 +12,15 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-          child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 300,
+              height: mediaQuery.size.height * 0.40,
               alignment: Alignment.center,
               child: const Image(
                 image: AssetImage('assets/meet-pals.png'),
@@ -28,12 +28,12 @@ class IntroScreen extends StatelessWidget {
               ),
             ),
             Container(
-              padding: p20,
+              padding: pBRL20,
               alignment: Alignment.centerLeft,
               child: Text(intro, style: mainTextG),
             ),
             Container(
-              padding: pBRL20,
+              padding: pRL20,
               alignment: Alignment.centerLeft,
               child: Text(short, style: shortTextW),
             ),
@@ -53,7 +53,7 @@ class IntroScreen extends StatelessWidget {
             conHeight10
           ],
         ),
-      )),
+      ),
     );
   }
 }

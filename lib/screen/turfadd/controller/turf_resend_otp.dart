@@ -8,7 +8,6 @@ import '../utils/url.dart';
 Future<void> resendOTP(BuildContext context, String mobile) async {
   final otpSend = {'mobile': mobile};
   final headers = {'Content-Type': 'application/json'};
-
   final response = await Dio().post(resendOtp,
       data: jsonEncode(otpSend), options: Options(headers: headers));
 

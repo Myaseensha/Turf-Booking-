@@ -12,6 +12,7 @@ String locationText = 'Location';
 String locationNearText = 'Near location';
 String districText = 'Distric';
 String stateText = 'State';
+String eventText = "Event Type";
 String nameText = 'Name';
 String phoneText = 'Phone';
 String emailText = 'Email';
@@ -20,6 +21,7 @@ String otpText = 'Enter OTP';
 String otpCommend =
     'We have sent you access code Via SMS for mobile number verification';
 String passwordText = 'Password';
+String eventCommend = "Please Enter your Event type";
 String nameTextCommend = 'Please Enter your Name';
 String phoneTextCommend = 'Please Enter your Password';
 String emailTextCommend = 'Please Enter your Email';
