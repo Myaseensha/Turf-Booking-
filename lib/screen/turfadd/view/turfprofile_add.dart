@@ -94,7 +94,13 @@ class TurfProfileAdd extends StatelessWidget {
                 validetmsg: locationTextCommend,
                 controllers: nearsteLocationController,
               ),
-
+              FromField(
+                bordercolor: conGrey,
+                hint: eventText,
+                keytype: TextInputType.name,
+                validetmsg: eventCommend,
+                controllers: eventController,
+              ),
               //------------------------------------------------------fromend----------------------------------------
               Padding(
                 padding: pTRL20,
