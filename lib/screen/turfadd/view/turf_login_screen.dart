@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
+import 'package:turf/screen/turfadd/controller/turf_login.dart';
 
 import '../../../widget/from_filde.dart';
 
@@ -27,7 +28,7 @@ class LoginScreenTurf extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(children: [
             Container(
-              child: Lottie.asset('name'),
+              child: Lottie.asset('assets/Lottie/dlf10_KtZi3gfvBz.json'),
             ),
             Container(
               padding: pTRL20,
@@ -56,7 +57,8 @@ class LoginScreenTurf extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      return;
+                      turflogin(emailController.text, passwordController.text,
+                          context);
                     }
                   },
                   style: signup,

@@ -35,7 +35,7 @@ class CourtAdd {
       district: json['district'],
       state: json['state'],
       event: json['event'],
-      locationDetails: json['locationDetails'],
+      locationDetails: json['loction_Details'],
       imageFiles:
           List<File>.from(json['imageFilePaths'].map((path) => File(path))),
     );
