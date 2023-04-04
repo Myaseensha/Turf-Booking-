@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:turf/core/color.dart';
+
 import 'package:turf/core/padding.dart';
+
+import '../../../widget/category_button.dart';
+import '../../../widget/search_bar.dart';
 
 class TurfProfileSceen extends StatelessWidget {
   const TurfProfileSceen({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class TurfProfileSceen extends StatelessWidget {
                         children: [
                           Padding(
                             padding: pL10,
-                            child: CircleAvatar(
+                            child: const CircleAvatar(
                               radius: 50,
                               backgroundImage:
                                   AssetImage('assets/image/th (7).webp'),
@@ -69,70 +70,6 @@ class TurfProfileSceen extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CategoryButton extends StatelessWidget {
-  final String title;
-
-  const CategoryButton({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: pR10,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: conBlack,
-            border: Border.all(width: 2, color: conWhite),
-          ),
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Text(
-              title,
-              style: TextStyle(
-                color: conWhite,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SearchBar extends StatelessWidget {
-  const SearchBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: TextField(
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          hintText: 'Search',
-          hintStyle: const TextStyle(color: Colors.white),
-          prefixIcon: const Icon(Icons.search, color: Colors.white),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: Colors.white),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: Colors.grey),
-          ),
         ),
       ),
     );
