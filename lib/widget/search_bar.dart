@@ -5,7 +5,12 @@ import 'package:turf/core/color.dart';
 class SearchBar extends StatelessWidget {
   const SearchBar({
     Key? key,
+    required this.searchQuery,
+    required this.onSearchQueryChanged,
   }) : super(key: key);
+
+  final String searchQuery;
+  final Function(String) onSearchQueryChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +41,7 @@ class SearchBar extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.grey),
           ),
         ),
+        onChanged: onSearchQueryChanged,
       ),
     );
   }

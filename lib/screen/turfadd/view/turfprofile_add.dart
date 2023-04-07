@@ -33,7 +33,7 @@ class TurfProfileAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final courtProvider = Provider.of<CourtProvider>(context);
+    final courtProvider = Provider.of<CourtProviderimage>(context);
     final image1 =
         courtProvider.image != null ? FileImage(courtProvider.image!) : null;
     return Scaffold(

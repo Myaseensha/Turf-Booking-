@@ -18,7 +18,7 @@ Future<void> turflogin(
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('Turftoken', token);
       print(
-          "$token///////////////////////////////////////////////////////////////////\\\\\\");
+          "${response.data}///////////////////////////////////////////////////////////////////\\\\\\");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const TurfProfile(),

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-class CourtProvider extends ChangeNotifier {
+class CourtProviderimage extends ChangeNotifier {
   File? _image;
 
   File? get image => _image;

@@ -34,11 +34,13 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.5
-  image_picker: 
+  image_picker: null
   lottie: ^2.3.0
   pinput: null
   provider: ^6.0.5
-  shared_preferences: ^2.0.20 
+  shared_preferences: ^2.0.20
+  table_calendar: ^3.0.1
+  
 
 dev_dependencies:
   flutter_lints: ^2.0.0
