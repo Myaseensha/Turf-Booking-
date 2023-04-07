@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/screen/onborde_screen/splash_screen.dart';
-import 'package:turf/screen/onborde_screen/view/intro_screen.dart';
+
 import 'package:turf/screen/turfadd/controller/image_provider.dart';
+import 'package:turf/screen/user/controller/search_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => CourtProvider(),
+          create: (context) => TurfProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CourtProviderimage(),
         )
       ],
       child: MaterialApp(
