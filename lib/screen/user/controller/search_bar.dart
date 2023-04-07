@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/color.dart';
+import '../model/turf_get.dart';
 
-class TurfSearchBar extends StatelessWidget {
-  const TurfSearchBar({super.key});
+class TurfProvider extends ChangeNotifier {
+  final List<Court> _courts = [];
+  List<Court> _filteredCourts = [];
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: conWhite,
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      child: const TextField(
-        decoration: InputDecoration(
-          hintText: 'Search for turfs or bookings',
-          border: InputBorder.none,
-          prefixIcon: Icon(Icons.search),
-          contentPadding:
-              EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        ),
-      ),
-    );
+  Future<void> fetchCourts() async {
+    _filteredCourts = _courts;
+    notifyListeners();
+  }
+
+  List<Court> get filteredCourts => _filteredCourts;
+
+  void filterCourts(String query) {
+    if (query.isEmpty) {
+      _filteredCourts = _courts;
+    } else {
+      _filteredCourts = _courts
+          .where((court) =>
+              court.courtName.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
   }
 }
