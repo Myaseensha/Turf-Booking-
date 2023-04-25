@@ -88,67 +88,70 @@ class TurfProfile extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  children: const [
-                                    Text('Booked'),
-                                    Text('10'),
-                                  ],
-                                ),
-                                Column(
-                                  children: const [
-                                    Text('Cancel'),
-                                    Text('2'),
-                                  ],
-                                ),
-                                Column(
-                                  children: const [
-                                    Text('Total Renew'),
-                                    Text('20'),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            Expanded(
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: DataTable(
-                                  columns: const [
-                                    DataColumn(label: Text('Turf Date')),
-                                    DataColumn(
-                                        label: Text('Total Working Hours')),
-                                    DataColumn(label: Text('Collections')),
-                                    DataColumn(label: Text('Profit')),
-                                  ],
-                                  rows: const [
-                                    DataRow(cells: [
-                                      DataCell(Text('Jan 1, 2023')),
-                                      DataCell(Text('4')),
-                                      DataCell(Text('₹ 5000')),
-                                      DataCell(Text('₹ 2500')),
-                                    ]),
-                                    DataRow(cells: [
-                                      DataCell(Text('Jan 2, 2023')),
-                                      DataCell(Text('5')),
-                                      DataCell(Text('₹ 6000')),
-                                      DataCell(Text('₹ 3000')),
-                                    ]),
-                                    DataRow(cells: [
-                                      DataCell(Text('Jan 3, 2023')),
-                                      DataCell(Text('3')),
-                                      DataCell(Text('₹ 4000')),
-                                      DataCell(Text('₹ 2000')),
-                                    ]),
-                                  ],
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    children: const [
+                                      Text('Booked'),
+                                      Text('10'),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: const [
+                                      Text('Cancel'),
+                                      Text('2'),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: const [
+                                      Text('Total Renew'),
+                                      Text('20'),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: DataTable(
+                                    columns: const [
+                                      DataColumn(label: Text('Turf Date')),
+                                      DataColumn(
+                                          label: Text('Total Working Hours')),
+                                      DataColumn(label: Text('Collections')),
+                                      DataColumn(label: Text('Profit')),
+                                    ],
+                                    rows: const [
+                                      DataRow(cells: [
+                                        DataCell(Text('Jan 1, 2023')),
+                                        DataCell(Text('4')),
+                                        DataCell(Text('₹ 5000')),
+                                        DataCell(Text('₹ 2500')),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text('Jan 2, 2023')),
+                                        DataCell(Text('5')),
+                                        DataCell(Text('₹ 6000')),
+                                        DataCell(Text('₹ 3000')),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text('Jan 3, 2023')),
+                                        DataCell(Text('3')),
+                                        DataCell(Text('₹ 4000')),
+                                        DataCell(Text('₹ 2000')),
+                                      ]),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         const Center(
                           child: Text('New Post'),

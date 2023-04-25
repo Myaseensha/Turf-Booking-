@@ -1,9 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:turf/core/h_w.dart';
-
 import 'package:turf/core/padding.dart';
+import 'package:turf/screen/user/controller/single_turfget.dart';
 import 'package:turf/screen/user/controller/turf_get.dart';
 import 'package:turf/screen/user/model/turf_get.dart';
 import 'package:turf/screen/user/view/singel_turf_screen.dart';
@@ -137,13 +136,18 @@ class _TurfProfileSceenState extends State<TurfProfileSceen> {
                                               child: SizedBox(
                                                 height: 25,
                                                 child: OutlinedButton(
-                                                  onPressed: () {
+                                                  onPressed: () async {
+                                                    await fetchSingleCourts(
+                                                        court.id);
                                                     Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              OneOneTurfPage(),
-                                                        ));
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            OneOneTurfPage(
+                                                          id: court.id,
+                                                        ),
+                                                      ),
+                                                    );
                                                   },
                                                   style:
                                                       OutlinedButton.styleFrom(
@@ -177,7 +181,7 @@ class _TurfProfileSceenState extends State<TurfProfileSceen> {
                         },
                       );
                     } else {
-                      return Container(width: 0, height: 0);
+                      return const SizedBox(width: 0, height: 0);
                     }
                   }),
             ),

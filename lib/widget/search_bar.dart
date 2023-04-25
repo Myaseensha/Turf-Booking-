@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turf/core/color.dart';
+import 'package:turf/screen/user/controller/user_details_get.dart';
+import 'package:turf/screen/user/view/user_details.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
@@ -28,8 +30,20 @@ class SearchBar extends StatelessWidget {
               color: conWhite,
             ),
             onPressed: () async {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.clear();
+              final data = await getUserDetails();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserPage(
+                      userName: data.username,
+                      phoneNumber: '${data.mobile}',
+                      email: data.email,
+                    ),
+                  ));
+
+              final prefs = await SharedPreferences.getInstance();
+              final token = prefs.getString('token');
+              print(token);
             },
           ),
           enabledBorder: OutlineInputBorder(

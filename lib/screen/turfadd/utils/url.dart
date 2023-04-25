@@ -1,7 +1,7 @@
-const String baseUrl = 'http://10.4.3.94:8888';
-const String otp = '$baseUrl/send-otp';
-const String sendotp = '$baseUrl/otp';
-const String resendOtp = '$baseUrl/otp-resend';
-const String ceratcourt = '$baseUrl/turf-registration';
-const String courtloginurl = "$baseUrl/turf-login";
-const turfgeturi = "$baseUrl/turfs";
+const String baseUrlTurf = 'https://let-s-play-turf-service.onrender.com';
+const String otp = '$baseUrlTurf/send-otp';
+const String sendotp = '$baseUrlTurf/otp';
+const String resendOtp = '$baseUrlTurf/otp-resend';
+const String ceratcourt = '$baseUrlTurf/turf-registration';
+const String courtloginurl = "$baseUrlTurf/turf-login";
+const turfgeturi = "$baseUrlTurf/turfs";

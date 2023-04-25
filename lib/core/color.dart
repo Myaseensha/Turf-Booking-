@@ -49,3 +49,28 @@ Color conBlack = Colors.black;
 Color conGrey = Colors.black26;
 MaterialColor? conMgeree =
     const Color.fromARGB(255, 30, 243, 37) as MaterialColor?;
+//profile text------------------------------------------
+TextStyle richTextMstyle(double maxWidth) {
+  return TextStyle(
+    height: 2,
+    color: conBlack,
+    fontSize: maxWidth * 0.040,
+    fontWeight: FontWeight.w500,
+  );
+}
+
+TextStyle richTextstyle(double maxWidth) {
+  return TextStyle(
+    color: conBlack,
+    fontSize: maxWidth * 0.035,
+    fontWeight: FontWeight.w500,
+  );
+}
+
+TextStyle richTextXLstyle(double maxWidth) {
+  return TextStyle(
+    color: conGreen,
+    fontSize: maxWidth * 0.040,
+    fontWeight: FontWeight.w600,
+  );
+}

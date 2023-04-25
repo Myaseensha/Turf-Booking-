@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import '../core/padding.dart';
 
 class Button extends StatelessWidget {
-  const Button(
-      {Key? key,
-      required this.colorB,
-      required this.colorF,
-      required this.title,
-      required this.style,
-      required this.classname})
-      : super(key: key);
+  const Button({
+    Key? key,
+    required this.colorB,
+    required this.colorF,
+    required this.title,
+    required this.style,
+    required this.onpress,
+  }) : super(key: key);
   final Color colorF;
   final Color colorB;
   final String title;
   final TextStyle style;
-  // ignore: prefer_typing_uninitialized_variables
-  final classname;
+  final VoidCallback onpress;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,13 +25,7 @@ class Button extends StatelessWidget {
         height: 50,
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => classname,
-                ));
-          },
+          onPressed: onpress,
           style: ElevatedButton.styleFrom(
             foregroundColor: colorF,
             backgroundColor: colorB,

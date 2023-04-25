@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/screen/onborde_screen/view/intro_screen.dart';
 
-import 'package:turf/screen/user/view/turf_profile_screen.dart';
+import 'package:turf/screen/user/view/turf_list_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

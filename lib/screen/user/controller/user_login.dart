@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turf/screen/user/utils/base_url.dart';
-import 'package:turf/screen/user/view/turf_profile_screen.dart';
+import 'package:turf/screen/user/view/turf_list_screen.dart';
 
 Future<void> userlogi(
     String password, String email, BuildContext context) async {
