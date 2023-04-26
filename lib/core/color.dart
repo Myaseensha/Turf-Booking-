@@ -34,14 +34,7 @@ ButtonStyle signup = ElevatedButton.styleFrom(
   ),
   elevation: 5.0,
 );
-ButtonStyle google = ElevatedButton.styleFrom(
-  foregroundColor: conGreen,
-  backgroundColor: conWhite,
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(40),
-  ),
-  elevation: 5.0,
-);
+
 //color-------------------------------------------
 Color conGreen = Colors.green.shade700;
 Color conWhite = Colors.white;
@@ -50,27 +43,17 @@ Color conGrey = Colors.black26;
 MaterialColor? conMgeree =
     const Color.fromARGB(255, 30, 243, 37) as MaterialColor?;
 //profile text------------------------------------------
-TextStyle richTextMstyle(double maxWidth) {
-  return TextStyle(
-    height: 2,
-    color: conBlack,
-    fontSize: maxWidth * 0.040,
-    fontWeight: FontWeight.w500,
-  );
-}
 
-TextStyle richTextstyle(double maxWidth) {
-  return TextStyle(
-    color: conBlack,
-    fontSize: maxWidth * 0.035,
-    fontWeight: FontWeight.w500,
-  );
-}
-
-TextStyle richTextXLstyle(double maxWidth) {
+TextStyle textstyle(maxWidth) {
   return TextStyle(
     color: conGreen,
+    fontWeight: FontWeight.bold,
     fontSize: maxWidth * 0.040,
-    fontWeight: FontWeight.w600,
+  );
+}
+
+TextStyle subtextstyle(double maxWidth) {
+  return TextStyle(
+    fontSize: maxWidth * 0.035,
   );
 }

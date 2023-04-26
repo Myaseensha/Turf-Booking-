@@ -14,9 +14,20 @@ Future<void> verifyotp(String mobile, String otp, String password, String name,
       data: json.encode(verifyotpbody), options: Options(headers: header));
   if (respons.statusCode == 200) {
     userAdd(context, email, mobile, password, name);
+    final responseData = respons.data;
+    final message = responseData['message'];
+    final snackBar = SnackBar(
+      behavior: SnackBarBehavior.floating,
+      content: Text("$message"),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   } else {
-    const snackBar = SnackBar(
-      content: Text('Internal Server Error !'),
+    final responseData = respons.data;
+    final message = responseData['message'];
+    final snackBar = SnackBar(
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+      content: Text("$message"),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

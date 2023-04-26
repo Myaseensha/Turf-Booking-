@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/user/controller/single_turfget.dart';
-import '../../../core/h_w.dart';
+import 'package:turf/screen/user/view/turf_booking_page.dart';
+import '../../../core/bottomsheet_style.dart';
+
+import '../../../widget/button.dart';
 import '../model/single_turf_get.dart';
 
 class OneOneTurfPage extends StatelessWidget {
@@ -32,200 +35,161 @@ class OneOneTurfPage extends StatelessWidget {
               return Stack(
                 children: [
                   Container(
-                    height: maxHeight / 3,
+                    height: maxHeight / 2.5,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(courts.images[0]['location']),
+                        image: NetworkImage(courts.images[1]['location']),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      top: maxHeight * 0.25,
-                      left: maxWidth * 0.05,
-                      right: maxWidth * 0.05,
+                      top: maxHeight * 0.35,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: maxHeight * 0.090,
-                              backgroundImage:
-                                  NetworkImage(courts.images[1]['location']),
-                            ),
-                            SizedBox(height: maxHeight * 0.02),
-                            Text(
-                              courts.courtName,
-                              style: TextStyle(
-                                fontSize: maxWidth * 0.07,
-                                fontWeight: FontWeight.bold,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(40))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: maxHeight * 0.05),
+                              Text(
+                                courts.courtName,
+                                style: TextStyle(
+                                  fontSize: maxWidth * 0.07,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(Icons.location_on, size: 16),
-                                const SizedBox(width: 5),
-                                Padding(
-                                  padding: p10,
-                                  child: Text(
-                                    '${courts.district},${courts.location}',
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: maxHeight * 0.03),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.location_on, size: 18),
+                                  Padding(
+                                    padding: p10,
+                                    child: Text(
+                                      '${courts.location}, ${courts.district}',
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.av_timer_rounded),
-                                      SizedBox(width: 8),
-                                      Text(
-                                        'Time',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.calendar_today),
-                                      SizedBox(width: 8),
-                                      Text(
-                                        'Book',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Card(
-                              child: Padding(
-                                padding: p10,
+                                ],
+                              ),
+                              SizedBox(height: maxHeight * 0.02),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  fancyfunctionButton(
+                                      Colors.red,
+                                      0.23,
+                                      12,
+                                      Icons.location_on_rounded,
+                                      maxWidth,
+                                      maxHeight,
+                                      onpress: () {},
+                                      text: "Location"),
+                                  fancyfunctionButton(
+                                      conGreen,
+                                      0.40,
+                                      15,
+                                      Icons.calendar_today_rounded,
+                                      maxWidth,
+                                      maxHeight, onpress: () {
+                                    showModalBottomSheet(
+                                      backgroundColor: conGreen,
+                                      shape: roundedRectangleBorder,
+                                      isScrollControlled: true,
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return SingleChildScrollView(
+                                          child: SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.55,
+                                            child: BookingPage(
+                                              tokenid: id,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }, text: "Book Slots"),
+                                  fancyfunctionButton(Colors.orange, 0.23, 12,
+                                      Icons.star, maxWidth, maxHeight,
+                                      onpress: () {}, text: "Reviews"),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Card(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "Details",
-                                      style: TextStyle(
-                                        color: conGrey,
-                                        fontSize: maxWidth * 0.060,
-                                        fontWeight: FontWeight.w600,
+                                    const SizedBox(height: 10),
+                                    ListTile(
+                                      leading: Icon(Icons.location_pin,
+                                          color: conBlack),
+                                      title: Text(
+                                        'Location',
+                                        style: textstyle(maxWidth),
                                       ),
+                                      subtitle: Text(
+                                          '${courts.state}, ${courts.district}, ${courts.location}, ${courts.locationDetails}',
+                                          style: subtextstyle(maxWidth)),
                                     ),
-                                    conHeight20,
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Location :- ',
-                                          style: richTextXLstyle(maxWidth),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: SizedBox(
-                                            child: Text(
-                                              ' ${courts.state}, ${courts.district}, ${courts.location}, ${courts.locationDetails}',
-                                              style: richTextstyle(maxWidth),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    ListTile(
+                                      leading:
+                                          Icon(Icons.phone, color: conBlack),
+                                      title: Text('Contact',
+                                          style: textstyle(maxWidth)),
+                                      subtitle: Text(courts.mobile,
+                                          style: subtextstyle(maxWidth)),
                                     ),
-                                    RichText(
-                                      text: TextSpan(
-                                        text: 'Contact :- ',
-                                        style: richTextXLstyle(maxWidth),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: ' ${courts.mobile}',
-                                            style: richTextMstyle(maxWidth),
-                                          ),
-                                        ],
+                                    ListTile(
+                                      leading:
+                                          Icon(Icons.email, color: conBlack),
+                                      title: Text('Email',
+                                          style: textstyle(maxWidth)),
+                                      subtitle: Text(courts.email,
+                                          style: subtextstyle(maxWidth)),
+                                    ),
+                                    ListTile(
+                                      leading:
+                                          Icon(Icons.event, color: conBlack),
+                                      title: Text(
+                                        'Event Type',
+                                        style: textstyle(maxWidth),
                                       ),
+                                      subtitle: Text(courts.event,
+                                          style: subtextstyle(maxWidth)),
                                     ),
-                                    RichText(
-                                      text: TextSpan(
-                                        text: 'Email :- ',
-                                        style: richTextXLstyle(maxWidth),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: ' ${courts.email}',
-                                            style: richTextMstyle(maxWidth),
-                                          ),
-                                        ],
-                                      ),
+                                    ListTile(
+                                      leading: Icon(Icons.attach_money,
+                                          color: conBlack),
+                                      title: Text('Court Fee',
+                                          style: textstyle(maxWidth)),
+                                      subtitle: Text('${courts.price}',
+                                          style: subtextstyle(maxWidth)),
                                     ),
-                                    RichText(
-                                      text: TextSpan(
-                                        text: 'Event Type :- ',
-                                        style: richTextXLstyle(maxWidth),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: ' ${courts.event}',
-                                            style: richTextMstyle(maxWidth),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                        text: 'Court Fee :- ',
-                                        style: richTextXLstyle(maxWidth),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: ' ${courts.price} ',
-                                            style: richTextMstyle(maxWidth),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                        text: 'Holiday :- ',
-                                        style: richTextXLstyle(maxWidth),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: ' ${courts.holiday} ',
-                                            style: richTextMstyle(maxWidth),
-                                          ),
-                                        ],
+                                    ListTile(
+                                      leading: Icon(Icons.calendar_today,
+                                          color: conBlack),
+                                      title: Text('Holiday',
+                                          style: textstyle(maxWidth)),
+                                      subtitle: Text(
+                                        courts.holiday,
+                                        style: subtextstyle(maxWidth),
                                       ),
                                     ),
                                   ],
@@ -233,8 +197,8 @@ class OneOneTurfPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turf/core/color.dart';
 
 import '../core/padding.dart';
 
@@ -30,7 +31,7 @@ class Button extends StatelessWidget {
             foregroundColor: colorF,
             backgroundColor: colorB,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(7),
             ),
             elevation: 10.0,
           ),
@@ -42,4 +43,52 @@ class Button extends StatelessWidget {
       ),
     );
   }
+}
+
+fancyfunctionButton(
+  Color colorI,
+  double width,
+  double sizeT,
+  IconData icon,
+  double maxWidth,
+  double maxHeight, {
+  required String text,
+  required VoidCallback onpress,
+}) {
+  return SizedBox(
+    height: maxHeight * 0.085,
+    width: maxWidth * width,
+    child: ElevatedButton(
+      onPressed: onpress,
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+              color: Color.fromARGB(205, 158, 158, 158), width: 1.7),
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: colorI,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            textAlign: TextAlign.center,
+            text,
+            style: TextStyle(
+              color: conBlack,
+              fontSize: sizeT,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

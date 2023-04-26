@@ -24,12 +24,20 @@ Future<void> updateProfile(
     if (response.statusCode == 200) {
       final responseData = response.data;
       final message = responseData['message'];
-      Navigator.pop(context);
-      print(message);
+      final snackBar = SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text("$message"),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       final responseData = response.data;
       final message = responseData['message'];
-      print(message);
+      final snackBar = SnackBar(
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        content: Text("$message"),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       throw Exception('Failed to update profile');
     }
   } catch (error) {

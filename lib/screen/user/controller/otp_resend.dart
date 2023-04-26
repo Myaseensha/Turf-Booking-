@@ -10,13 +10,20 @@ Future<void> resendotp(String mobile, BuildContext context) async {
   final response = await Dio().post(resendotpurl,
       data: json.encode(otpbody), options: Options(headers: header));
   if (response.statusCode == 200) {
-    const snackBar = SnackBar(
-      content: Text('OTP sended in your mobile number'),
+    final responseData = response.data;
+    final message = responseData['message'];
+    final snackBar = SnackBar(
+      behavior: SnackBarBehavior.floating,
+      content: Text("$message"),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   } else {
-    const snackBar = SnackBar(
-      content: Text('Internal Server Error !'),
+    final responseData = response.data;
+    final message = responseData['message'];
+    final snackBar = SnackBar(
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+      content: Text("$message"),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

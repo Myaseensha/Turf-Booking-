@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-
 import '../core/color.dart';
 
-TextField formStyle(TextEditingController name, {bool enabled = false}) {
-  return TextField(
-    controller: name,
+Widget buildTextField({
+  required TextEditingController controller,
+  required String label,
+  bool enabled = false,
+  TextInputType keyboardType = TextInputType.name,
+  String? Function(String?)? validator,
+}) {
+  return TextFormField(
+    controller: controller,
     style: TextStyle(color: conGreen),
     enabled: enabled,
-    keyboardType: TextInputType.name,
+    keyboardType: keyboardType,
     decoration: InputDecoration(
+      labelText: label,
       labelStyle: TextStyle(color: conGreen),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30.0),
@@ -30,5 +36,6 @@ TextField formStyle(TextEditingController name, {bool enabled = false}) {
         ),
       ),
     ),
+    validator: validator,
   );
 }

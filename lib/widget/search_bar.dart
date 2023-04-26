@@ -21,10 +21,7 @@ class SearchBar extends StatelessWidget {
       child: TextField(
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          hintText: 'Search',
-          hintStyle: const TextStyle(color: Colors.white),
-          prefixIcon: const Icon(Icons.search, color: Colors.white),
-          icon: IconButton(
+          suffixIcon: IconButton(
             icon: Icon(
               Icons.person,
               color: conWhite,
@@ -46,12 +43,15 @@ class SearchBar extends StatelessWidget {
               print(token);
             },
           ),
+          hintText: 'Search',
+          hintStyle: const TextStyle(color: Colors.white),
+          prefixIcon: const Icon(Icons.search, color: Colors.white),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(color: Colors.white),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(40),
             borderSide: const BorderSide(color: Colors.grey),
           ),
         ),
