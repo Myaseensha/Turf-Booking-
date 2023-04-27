@@ -9,9 +9,16 @@ import 'package:turf/screen/user/controller/slot_booking.dart';
 import 'package:turf/widget/button.dart';
 import '../model/booking_model.dart';
 
-class BookingPage extends StatelessWidget {
+// ignore: must_be_immutable
+class BookingPage extends StatefulWidget {
   BookingPage({super.key, required this.tokenid});
   String tokenid;
+
+  @override
+  State<BookingPage> createState() => _BookingPageState();
+}
+
+class _BookingPageState extends State<BookingPage> {
   @override
   Widget build(
     BuildContext context,
@@ -47,19 +54,24 @@ class BookingPage extends StatelessWidget {
                   color = Colors.grey.shade600;
                 }
                 return Padding(
-                  padding: pR20,
+                  padding: const EdgeInsets.only(right: 20),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       backgroundColor: color,
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
+                      shape: const RoundedRectangleBorder(
+                        side: BorderSide(
                             color: Color.fromARGB(205, 158, 158, 158),
                             width: 1.7),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      dateModel.setSelectedDate(date);
+                      setState(() {
+                        color = Colors.red;
+                      });
+                    },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +84,7 @@ class BookingPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        conHeight10,
+                        const SizedBox(height: 10),
                         Text(
                           DateFormat.MMM().format(date),
                           style: TextStyle(
@@ -113,12 +125,16 @@ class BookingPage extends StatelessWidget {
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
-                            color: Color.fromARGB(205, 158, 158, 158),
-                            width: 1.7),
+                          color: Color.fromARGB(205, 158, 158, 158),
+                          width: 1.7,
+                        ),
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // Set the selected time in the TimeModel
+                      timeModel.setSelectedTime(time);
+                    },
                     child: Center(
                       child: Padding(
                         padding: pRL20,
@@ -143,9 +159,12 @@ class BookingPage extends StatelessWidget {
             colorB: conWhite,
             colorF: conGreen,
             onpress: () async {
+              final selectedDate = dateModel.selectedDate;
+              final selectedTime = timeModel.selectedTime;
               final body = {
-                'slot_time': '2023-04-25 12:00:00',
-                'slot_duration': '60 minutes'
+                'date': selectedDate.toString(),
+                'time': selectedTime,
+                'turf': widget.tokenid
               };
               final prefs = await SharedPreferences.getInstance();
               final token = prefs.getString('token');

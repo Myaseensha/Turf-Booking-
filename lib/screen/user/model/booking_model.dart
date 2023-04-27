@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class DateModel with ChangeNotifier {
   final List<DateTime> _dates = [];
+  DateTime? _selectedDate;
 
   List<DateTime> get dates => _dates;
+  DateTime? get selectedDate => _selectedDate;
+
   void generateDates() {
     DateTime startDate = DateTime.now();
     DateTime endDate = startDate.add(const Duration(days: 21));
@@ -15,10 +18,17 @@ class DateModel with ChangeNotifier {
 
     notifyListeners();
   }
+
+  void setSelectedDate(DateTime date) {
+    _selectedDate = date;
+    notifyListeners();
+  }
 }
 
 class TimeModel with ChangeNotifier {
-  final List<String> _times = [
+  String _selectedTime = '';
+
+  List<String> _times = [
     '9:00 AM',
     '10:00 AM',
     '11:00 AM',
@@ -31,7 +41,14 @@ class TimeModel with ChangeNotifier {
     '6:00 PM',
     '7:00 PM',
     '8:00 PM',
+    '9:00 PM'
   ];
 
+  String get selectedTime => _selectedTime;
   List<String> get times => _times;
+
+  void setSelectedTime(String time) {
+    _selectedTime = time;
+    notifyListeners();
+  }
 }

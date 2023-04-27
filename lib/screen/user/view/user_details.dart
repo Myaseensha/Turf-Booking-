@@ -122,7 +122,7 @@ class UserPageState extends State<UserPage> {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SplashScreen(),
+                            builder: (context) => const SplashScreen(),
                           ),
                           (route) => false);
                     },
