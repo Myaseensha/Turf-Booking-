@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -5,20 +7,100 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/padding.dart';
+import 'package:turf/screen/user/controller/bookign_failde.dart';
+import 'package:turf/screen/user/controller/booking_success.dart';
 import 'package:turf/screen/user/controller/slot_booking.dart';
 import 'package:turf/widget/button.dart';
 import '../model/booking_model.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: must_be_immutable
 class BookingPage extends StatefulWidget {
-  BookingPage({super.key, required this.tokenid});
+  BookingPage(
+      {super.key,
+      required this.tokenid,
+      required this.email,
+      required this.number,
+      required this.userName,
+      required this.fee});
   String tokenid;
-
+  String email;
+  String number;
+  String userName;
+  double fee;
   @override
   State<BookingPage> createState() => _BookingPageState();
 }
 
 class _BookingPageState extends State<BookingPage> {
+  int? selectedDateIndex;
+  int? selectedtimeIndex;
+  late Razorpay _razorpay;
+
+  @override
+  void initState() {
+    super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  openCheckout(String email, String number, String userName, int fee) async {
+    var options = {
+      'key': 'rzp_test_NNbwJ9tmM0fbxj',
+      'amount': fee,
+      'name': userName,
+      'description': 'Payment',
+      'prefill': {'contact': number, 'email': email},
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint(e as String?);
+    }
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final bookingId = prefs.getString('bookingId');
+    print(token);
+    print(bookingId);
+    await bookingSuccess(token.toString(), bookingId.toString(), context);
+    print("....................................................$bookingId");
+    print(token);
+    print(bookingId);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final bookingId = prefs.getString('bookingId');
+    print(token);
+    print(bookingId);
+    await bookingFailed(bookingId.toString(), token.toString());
+    log("....................................................$bookingId");
+    print(token);
+    print(bookingId);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: ${response.walletName}", timeInSecForIosWeb: 4);
+  }
+
   @override
   Widget build(
     BuildContext context,
@@ -69,7 +151,7 @@ class _BookingPageState extends State<BookingPage> {
                     onPressed: () {
                       dateModel.setSelectedDate(date);
                       setState(() {
-                        color = Colors.red;
+                        selectedDateIndex = index;
                       });
                     },
                     child: Column(
@@ -78,8 +160,10 @@ class _BookingPageState extends State<BookingPage> {
                       children: [
                         Text(
                           DateFormat.d().format(date),
-                          style: const TextStyle(
-                            color: Colors.black54,
+                          style: TextStyle(
+                            color: selectedDateIndex == index
+                                ? Colors.red
+                                : Colors.grey.shade800,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
@@ -88,7 +172,9 @@ class _BookingPageState extends State<BookingPage> {
                         Text(
                           DateFormat.MMM().format(date),
                           style: TextStyle(
-                            color: Colors.grey.shade800,
+                            color: selectedDateIndex == index
+                                ? Colors.red
+                                : Colors.grey.shade800,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -132,8 +218,10 @@ class _BookingPageState extends State<BookingPage> {
                       ),
                     ),
                     onPressed: () {
-                      // Set the selected time in the TimeModel
                       timeModel.setSelectedTime(time);
+                      setState(() {
+                        selectedtimeIndex = index;
+                      });
                     },
                     child: Center(
                       child: Padding(
@@ -141,7 +229,9 @@ class _BookingPageState extends State<BookingPage> {
                         child: Text(
                           time,
                           style: TextStyle(
-                            color: conBlack,
+                            color: selectedtimeIndex == index
+                                ? Colors.red
+                                : Colors.grey.shade800,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -168,7 +258,15 @@ class _BookingPageState extends State<BookingPage> {
               };
               final prefs = await SharedPreferences.getInstance();
               final token = prefs.getString('token');
-              bookSlot("$token", body);
+              final resulte = await bookSlot(
+                token.toString(),
+                body,
+                context,
+              );
+              if (resulte == true) {
+                openCheckout(widget.email, widget.number, widget.userName,
+                    widget.fee.toInt());
+              }
             },
             title: 'Book Slote',
           ),

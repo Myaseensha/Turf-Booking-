@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/user/controller/single_turfget.dart';
+import 'package:turf/screen/user/controller/user_details_get.dart';
+import 'package:turf/screen/user/model/user_model.dart';
 import 'package:turf/screen/user/view/turf_booking_page.dart';
 import '../../../core/bottomsheet_style.dart';
 
@@ -18,6 +20,7 @@ class OneOneTurfPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getUserDetails();
     return Scaffold(
         body: FutureBuilder<SingleCourt>(
       future: fetchSingleCourts(id),
@@ -117,6 +120,10 @@ class OneOneTurfPage extends StatelessWidget {
                                                 0.55,
                                             child: BookingPage(
                                               tokenid: id,
+                                              email: courts.email,
+                                              number: courts.mobile,
+                                              userName: courts.courtName,
+                                              fee: courts.price * 100,
                                             ),
                                           ),
                                         );

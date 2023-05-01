@@ -7,6 +7,8 @@ import 'package:turf/widget/button.dart';
 
 import '../../../core/color.dart';
 import '../../../widget/coustm_style.dart';
+import '../controller/booking_details.dart';
+import '../model/booking_model.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({
@@ -71,6 +73,38 @@ class UserPageState extends State<UserPage> {
                     },
                   ),
                   const SizedBox(height: 20),
+                  IconButton(
+                    icon: Icon(Icons.history),
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      final token = prefs.getString('token');
+                      if (token != null) {
+                        final bookings = await getUserBookings(token, context);
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return UserBookingsSheet(
+                              bookings: bookings,
+                              onClose: () {
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                        );
+                      } else {
+                        void showSnackbar(
+                            BuildContext context, String message) {
+                          final snackBar = SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text(message),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+
+                        showSnackbar(context, 'Token not found.');
+                      }
+                    },
+                  ),
                   buildTextField(
                     controller: mobile,
                     label: "Mobile",

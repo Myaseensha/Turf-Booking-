@@ -20,9 +20,19 @@ Future<void> userlogi(
           builder: (context) => const TurfProfileSceen(),
         ),
         (route) => false);
+    final responseData = respons.data;
+    final message = responseData['message'];
+    final snackBar = SnackBar(
+      behavior: SnackBarBehavior.floating,
+      content: Text("$message"),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   } else {
-    const snackBar = SnackBar(
-      content: Text('Internal Server Error !'),
+    final responseData = respons.data;
+    final message = responseData['message'];
+    final snackBar = SnackBar(
+      behavior: SnackBarBehavior.floating,
+      content: Text("$message"),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

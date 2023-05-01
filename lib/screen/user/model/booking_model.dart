@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/padding.dart';
+
 class DateModel with ChangeNotifier {
   final List<DateTime> _dates = [];
   DateTime? _selectedDate;
@@ -50,5 +52,109 @@ class TimeModel with ChangeNotifier {
   void setSelectedTime(String time) {
     _selectedTime = time;
     notifyListeners();
+  }
+}
+
+class UserBookingsSheet extends StatefulWidget {
+  final List<dynamic> bookings;
+  final VoidCallback onClose;
+
+  const UserBookingsSheet({
+    Key? key,
+    required this.bookings,
+    required this.onClose,
+  }) : super(key: key);
+
+  @override
+  UserBookingsSheetState createState() => UserBookingsSheetState();
+}
+
+class UserBookingsSheetState extends State<UserBookingsSheet> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        height: 400,
+        child: ListView.separated(
+          separatorBuilder: (BuildContext context, int index) =>
+              const SizedBox(height: 16),
+          itemCount: widget.bookings.length,
+          itemBuilder: (BuildContext context, int index) {
+            final currentBooking = widget.bookings[index];
+            String paymentStatus = currentBooking['payment'];
+
+            Color paymentColor;
+            if (paymentStatus == 'Success') {
+              paymentColor = Colors.green;
+            } else if (paymentStatus == "Failed") {
+              paymentColor = Colors.red;
+            } else {
+              paymentColor = Colors.blue;
+            }
+
+            DateTime bookDate = DateTime.parse(currentBooking['bookDate']);
+            String formattedBookDate =
+                "${bookDate.day}/${bookDate.month}/${bookDate.year}";
+
+            String time = currentBooking['time'];
+            if (time.isEmpty) {
+              return const SizedBox.shrink();
+            }
+
+            return Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(0, 4),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    currentBooking['turf']['courtName'],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        formattedBookDate,
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        paymentStatus,
+                        style: TextStyle(
+                          color: paymentColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        time,
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ));
   }
 }
