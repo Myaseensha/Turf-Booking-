@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:lottie/lottie.dart';
+
 import 'package:turf/core/color.dart';
 import 'package:turf/screen/user/controller/user_details_get.dart';
 import 'package:turf/screen/user/view/user_details.dart';
@@ -28,6 +29,14 @@ class SearchBar extends StatelessWidget {
             ),
             onPressed: () async {
               final data = await getUserDetails();
+              if (data == ConnectionState.waiting) {
+                Center(
+                    child: SizedBox(
+                  height: 50,
+                  child: Lottie.asset(
+                      'assets/Lottie/36621-sports-app-loading-indicator.json'),
+                ));
+              }
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -37,10 +46,6 @@ class SearchBar extends StatelessWidget {
                       email: data.email,
                     ),
                   ));
-
-              final prefs = await SharedPreferences.getInstance();
-              final token = prefs.getString('token');
-              print(token);
             },
           ),
           hintText: 'Search',

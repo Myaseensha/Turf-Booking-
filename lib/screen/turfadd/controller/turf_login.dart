@@ -17,11 +17,11 @@ Future<void> turflogin(
       final token = response.data['token'];
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('Turftoken', token);
-      log(
-          "${response.data}///////////////////////////////////////////////////////////////////\\\\\\");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const TurfProfile(),
+            builder: (context) => TurfProfile(
+              token: '$token',
+            ),
           ),
           (route) => false);
     } else {
@@ -29,7 +29,6 @@ Future<void> turflogin(
     }
   } catch (e) {
     log(e.toString());
-
     const snackBar = SnackBar(
       content: Text('Please check your mobile data'),
     );

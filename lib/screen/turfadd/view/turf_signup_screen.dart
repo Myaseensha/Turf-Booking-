@@ -40,7 +40,8 @@ class SignUpScreenTurf extends StatelessWidget {
               children: [
                 SizedBox(
                   height: mediaQuery.size.height * 0.25,
-                  child: Lottie.asset('assets/Lottie/dlf10_KtZi3gfvBz.json'),
+                  child: Lottie.asset(
+                      'assets/Lottie/126572-football-team-players.json'),
                 ),
                 Container(
                   padding: pTRL20,

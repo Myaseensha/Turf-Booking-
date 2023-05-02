@@ -24,8 +24,6 @@ Future<void> signupinfo(BuildContext context, String email, String mobile,
                 courtname: courtName,
               )));
     } else if (response.statusCode == 409) {
-      // Something went wrong
-
       const snackBar = SnackBar(
         content: Text('User already exists'),
       );

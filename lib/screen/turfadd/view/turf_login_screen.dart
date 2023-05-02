@@ -28,7 +28,8 @@ class LoginScreenTurf extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(children: [
             Container(
-              child: Lottie.asset('assets/Lottie/dlf10_KtZi3gfvBz.json'),
+              child: Lottie.asset(
+                  'assets/Lottie/126572-football-team-players.json'),
             ),
             Container(
               padding: pTRL20,

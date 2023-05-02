@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turf/core/h_w.dart';
 import 'package:turf/core/padding.dart';
+
 import 'package:turf/screen/onborde_screen/splash_screen.dart';
 import 'package:turf/screen/user/controller/user_details_edit.dart';
-import 'package:turf/widget/button.dart';
 
-import '../../../core/color.dart';
-import '../../../widget/coustm_style.dart';
 import '../controller/booking_details.dart';
 import '../model/booking_model.dart';
 
@@ -44,129 +44,206 @@ class UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: pRL20,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Semantics(
-                    label: "User avatar",
-                    child: const CircleAvatar(
-                      backgroundImage: AssetImage(
-                          'assets/image/avatar-370-456322-512 (1).webp'),
-                      maxRadius: 100,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  buildTextField(
-                    label: "Name",
-                    enabled: isEditing,
-                    controller: name,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your name';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  IconButton(
-                    icon: Icon(Icons.history),
-                    onPressed: () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      final token = prefs.getString('token');
-                      if (token != null) {
-                        final bookings = await getUserBookings(token, context);
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return UserBookingsSheet(
-                              bookings: bookings,
-                              onClose: () {
-                                Navigator.pop(context);
-                              },
-                            );
-                          },
-                        );
-                      } else {
-                        void showSnackbar(
-                            BuildContext context, String message) {
-                          final snackBar = SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            content: Text(message),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-
-                        showSnackbar(context, 'Token not found.');
-                      }
-                    },
-                  ),
-                  buildTextField(
-                    controller: mobile,
-                    label: "Mobile",
-                    enabled: isEditing,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your mobile number';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  buildTextField(
-                    controller: mail,
-                    label: "Email",
-                    enabled: isEditing,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your Email address';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  Button(
-                    colorB: conGreen,
-                    colorF: conWhite,
-                    title: isEditing ? 'Save' : 'Edit',
-                    style: shortTextW,
-                    onpress: () async {
-                      setState(() {
-                        isEditing = !isEditing;
-                      });
-                      if (!isEditing) {
-                        await updateProfile(
-                            name.text, mail.text, mobile.text, context);
-                      }
-                    },
-                  ),
-                  Button(
-                    colorB: conGreen,
-                    colorF: conWhite,
-                    title: "LogOut",
-                    style: shortTextW,
-                    onpress: () async {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.clear();
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SplashScreen(),
+        body: SafeArea(
+            child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 24.0),
+                      const Center(
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage(
+                            'assets/image/avatar-370-456322-512 (1).webp',
                           ),
-                          (route) => false);
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+                          maxRadius: 64.0,
+                        ),
+                      ),
+                      const SizedBox(height: 24.0),
+                      TextFormField(
+                        controller: name,
+                        decoration: const InputDecoration(
+                          labelText: "Name",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        enabled: isEditing,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16.0),
+                      TextFormField(
+                        controller: mobile,
+                        decoration: const InputDecoration(
+                          labelText: "Mobile",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        enabled: isEditing,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your mobile number';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16.0),
+                      TextFormField(
+                        controller: mail,
+                        decoration: const InputDecoration(
+                          labelText: "Email",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        enabled: isEditing,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email address';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 24.0),
+                      Card(
+                        child: GestureDetector(
+                          onTap: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            final token = prefs.getString('token');
+                            if (token != null) {
+                              final bookings =
+                                  await getUserBookings(token, context);
+                              if (bookings == ConnectionState.waiting) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: SizedBox(
+                                    height: 50,
+                                    child: Lottie.asset(
+                                      'assets/Lottie/36621-sports-app-loading-indicator.json',
+                                    ),
+                                  ),
+                                ));
+                              } else {
+                                showModalBottomSheet(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return UserBookingsSheet(
+                                          bookings: bookings,
+                                          onClose: () {
+                                            Navigator.pop(context);
+                                          });
+                                    });
+                              }
+                            }
+                          },
+                          child: Padding(
+                            padding: p10,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Booking history",
+                                  style: TextStyle(
+                                    color: Colors.grey[500],
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                conWidth10,
+                                Icon(
+                                  Icons.history,
+                                  color: Colors.grey[500],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 150,
+                            child: ElevatedButton(
+                              onPressed: isEditing
+                                  ? () async {
+                                      setState(() {
+                                        isEditing = false;
+                                      });
+
+                                      await updateProfile(
+                                        name.text,
+                                        mail.text,
+                                        mobile.text,
+                                        context,
+                                      );
+                                    }
+                                  : () {
+                                      setState(() {
+                                        isEditing = true;
+                                      });
+                                    },
+                              style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: Text(
+                                isEditing ? 'Save' : 'Edit',
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 150,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.red,
+                                textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              onPressed: () async {
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.clear();
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SplashScreen(),
+                                  ),
+                                  (route) => false,
+                                );
+                              },
+                              child: const Text("Log out"),
+                            ),
+                          ),
+                        ],
+                      )
+                    ]))));
   }
 }

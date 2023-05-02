@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/user/controller/single_turfget.dart';
 import 'package:turf/screen/user/controller/user_details_get.dart';
-import 'package:turf/screen/user/model/user_model.dart';
 import 'package:turf/screen/user/view/turf_booking_page.dart';
 import '../../../core/bottomsheet_style.dart';
-
 import '../../../widget/button.dart';
 import '../model/single_turf_get.dart';
 
@@ -26,7 +25,12 @@ class OneOneTurfPage extends StatelessWidget {
       future: fetchSingleCourts(id),
       builder: (BuildContext context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+              child: SizedBox(
+            height: 50,
+            child: Lottie.asset(
+                'assets/Lottie/36621-sports-app-loading-indicator.json'),
+          ));
         } else if (snapshot.hasError) {
           return const Center(child: Text('Could not fetch data'));
         } else {

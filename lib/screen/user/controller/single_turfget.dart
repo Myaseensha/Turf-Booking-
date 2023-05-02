@@ -12,7 +12,6 @@ Future<SingleCourt> fetchSingleCourts(String id) async {
         '$singleturfurl?id=$id',
       ),
     );
-
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       return SingleCourt.fromJson(json);

@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:turf/screen/turfadd/utils/url.dart';
-import 'package:turf/screen/turfadd/view/profile_page.dart';
 
 import '../model/turf_add.dart';
+import '../view/turf_create_massege.dart';
 
 Future<void> createCourt(BuildContext context, CourtAdd court) async {
   final dio = Dio();
@@ -33,7 +33,7 @@ Future<void> createCourt(BuildContext context, CourtAdd court) async {
     if (response.statusCode == 200) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const TurfProfile(),
+            builder: (context) => const TurfCreated(),
           ),
           (route) => false);
     } else {

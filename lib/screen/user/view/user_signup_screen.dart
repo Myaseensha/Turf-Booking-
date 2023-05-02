@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/screen/user/controller/user_verification.dart';
 import 'package:turf/screen/user/view/user_login_screen.dart';
@@ -31,8 +32,12 @@ class SignUpScreenUser extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                Center(
+                    child: SizedBox(
+                  child: Lottie.asset('assets/Lottie/dlf10_KtZi3gfvBz.json'),
+                )),
                 Container(
-                  padding: pTRL30,
+                  padding: pTRL20,
                   child: Text(
                     findText,
                     style: mainTextG,
@@ -111,6 +116,7 @@ class SignUpScreenUser extends StatelessWidget {
                     ),
                   ],
                 ),
+                conHeight20,
               ]),
         ),
       )),

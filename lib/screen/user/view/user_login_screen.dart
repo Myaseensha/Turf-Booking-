@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/core/padding.dart';
@@ -25,6 +26,10 @@ class UserLoginScreen extends StatelessWidget {
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(children: [
+            Center(
+                child: SizedBox(
+              child: Lottie.asset('assets/Lottie/dlf10_KtZi3gfvBz.json'),
+            )),
             Container(
               padding: pTRL20,
               child: Text(
