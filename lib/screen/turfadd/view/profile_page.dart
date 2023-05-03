@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:turf/core/padding.dart';
+import 'package:turf/screen/turfadd/controller/dashboard.dart';
 
 import 'package:turf/screen/turfadd/controller/fatchturefprofile.dart';
 import 'package:turf/screen/turfadd/model/court_get.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:turf/screen/turfadd/view/user_booking_report.dart';
 
 import 'booking_count_card.dart';
 import 'booking_table.dart';
@@ -125,7 +129,45 @@ class TurfProfile extends StatelessWidget {
                                   ),
                                   SizedBox(height: maxHeight * 0.02),
                                   bookingCountCard(token),
-                                  SizedBox(height: maxHeight * 0.03),
+                                  SizedBox(height: maxHeight * 0.02),
+                                  Padding(
+                                    padding: pRL10,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  UserBookingReport(
+                                                token: token,
+                                              ),
+                                            ));
+                                      },
+                                      child: Card(
+                                        color: Colors.orange,
+                                        elevation: 5,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: const ListTile(
+                                          leading: Icon(
+                                            Icons.person,
+                                            color: Colors.white,
+                                          ),
+                                          title: Text(
+                                            'Booked Users',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: maxHeight * 0.02),
                                   ExpansionTile(
                                     title: Card(
                                       color: Colors.blueAccent,
@@ -152,7 +194,6 @@ class TurfProfile extends StatelessWidget {
                                       monthelyBookingTable(context, token),
                                     ],
                                   ),
-                                  SizedBox(height: maxHeight * 0.02),
                                   ExpansionTile(
                                     title: Card(
                                       color: Colors.green,
@@ -175,20 +216,26 @@ class TurfProfile extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    children: const [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: 10,
-                                        ),
-                                        child: Text(
-                                          'Your dashboard details goes here',
-                                          style: TextStyle(fontSize: 18),
-                                        ),
+                                    children: [
+                                      FutureBuilder<charts.BarChart>(
+                                        future: getMonthlyReportChart(token),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            return SizedBox(
+                                              height: 200,
+                                              child: snapshot.data!,
+                                            );
+                                          } else if (snapshot.hasError) {
+                                            return Text('Failed to fetch data');
+                                          } else {
+                                            return const CircularProgressIndicator();
+                                          }
+                                        },
                                       ),
                                     ],
                                   ),
                                   SizedBox(height: maxHeight * 0.02),
+                                  SizedBox(height: maxHeight * 0.03),
                                 ],
                               ),
                             ),
