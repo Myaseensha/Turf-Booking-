@@ -6,6 +6,7 @@ import 'package:turf/screen/turfadd/controller/dashboard.dart';
 import 'package:turf/screen/turfadd/controller/fatchturefprofile.dart';
 import 'package:turf/screen/turfadd/model/court_get.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:turf/screen/turfadd/view/turf_update.dart';
 import 'package:turf/screen/turfadd/view/user_booking_report.dart';
 
 import 'booking_count_card.dart';
@@ -36,11 +37,10 @@ class TurfProfile extends StatelessWidget {
               builder: (BuildContext context, BoxConstraints constraints) {
                 final double maxHeight = constraints.maxHeight;
                 final double maxWidth = constraints.maxWidth;
-
                 return Stack(
                   children: [
                     Container(
-                      height: maxHeight / 3,
+                      height: maxHeight / 3.5,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(court.images[0]['location']),
@@ -50,7 +50,7 @@ class TurfProfile extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: maxHeight * 0.25,
+                        top: maxHeight * 0.18,
                         left: maxWidth * 0.05,
                         right: maxWidth * 0.04,
                       ),
@@ -68,10 +68,26 @@ class TurfProfile extends StatelessWidget {
                                     NetworkImage(court.images[1]['location']),
                               ),
                               SizedBox(
-                                width: maxWidth * 0.5,
+                                height: maxHeight * 0.060,
+                                width: maxWidth * 0.4,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => TurfUpdate(
+                                            email: court.email,
+                                            holiday: court.holiday,
+                                            mobile: court.mobile,
+                                            locatiion: court.location,
+                                            price: court.price.toString(),
+                                            turfname: court.courtName,
+                                            token: token,
+                                          ),
+                                        ));
+                                  },
                                   style: ElevatedButton.styleFrom(
+                                    elevation: 0,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5),
                                     ),
@@ -127,7 +143,6 @@ class TurfProfile extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: maxHeight * 0.02),
                                   bookingCountCard(token),
                                   SizedBox(height: maxHeight * 0.02),
                                   Padding(
@@ -145,7 +160,7 @@ class TurfProfile extends StatelessWidget {
                                       },
                                       child: Card(
                                         color: Colors.orange,
-                                        elevation: 5,
+                                        elevation: 0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -171,7 +186,7 @@ class TurfProfile extends StatelessWidget {
                                   ExpansionTile(
                                     title: Card(
                                       color: Colors.blueAccent,
-                                      elevation: 5,
+                                      elevation: 0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
@@ -197,7 +212,7 @@ class TurfProfile extends StatelessWidget {
                                   ExpansionTile(
                                     title: Card(
                                       color: Colors.green,
-                                      elevation: 5,
+                                      elevation: 0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
@@ -226,7 +241,8 @@ class TurfProfile extends StatelessWidget {
                                               child: snapshot.data!,
                                             );
                                           } else if (snapshot.hasError) {
-                                            return Text('Failed to fetch data');
+                                            return const Text(
+                                                'Failed to fetch data');
                                           } else {
                                             return const CircularProgressIndicator();
                                           }
@@ -234,8 +250,6 @@ class TurfProfile extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: maxHeight * 0.02),
-                                  SizedBox(height: maxHeight * 0.03),
                                 ],
                               ),
                             ),

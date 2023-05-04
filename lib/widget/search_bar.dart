@@ -42,7 +42,7 @@ class SearchBar extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => UserPage(
                       userName: data.username,
-                      phoneNumber: '${data.mobile}',
+                      phoneNumber: data.mobile,
                       email: data.email,
                     ),
                   ));

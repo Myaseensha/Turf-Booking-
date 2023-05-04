@@ -10,18 +10,9 @@ FutureBuilder<Map<String, dynamic>> bookingCountCard(String token) {
       if (snapshot.hasData) {
         final data = snapshot.data!;
         return Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -31,13 +22,13 @@ FutureBuilder<Map<String, dynamic>> bookingCountCard(String token) {
                 children: [
                   Text(
                     '${data["today"]}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     "Today's Bookings",
                     style: TextStyle(
@@ -58,13 +49,13 @@ FutureBuilder<Map<String, dynamic>> bookingCountCard(String token) {
                 children: [
                   Text(
                     '${data["total"]}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     "Total Bookings",
                     style: TextStyle(
@@ -84,8 +75,7 @@ FutureBuilder<Map<String, dynamic>> bookingCountCard(String token) {
       return Center(
         child: SizedBox(
           height: 50,
-          child: Lottie.asset(
-              'assets/Lottie/36621-sports-app-loading-indicator.json'),
+          child: Lottie.asset('assets/Lottie/lf20_nwgje0cj.json'),
         ),
       );
     },

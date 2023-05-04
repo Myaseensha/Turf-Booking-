@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:turf/core/padding.dart';
 import 'package:turf/screen/turfadd/utils/url.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 

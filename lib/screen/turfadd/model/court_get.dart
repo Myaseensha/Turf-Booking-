@@ -3,13 +3,17 @@ class CourtDetails {
   final String email;
   final String mobile;
   final List<dynamic> images;
-
-  CourtDetails({
-    required this.courtName,
-    required this.email,
-    required this.mobile,
-    required this.images,
-  });
+  final String location;
+  final int price;
+  final String holiday;
+  CourtDetails(
+      {required this.courtName,
+      required this.email,
+      required this.mobile,
+      required this.location,
+      required this.images,
+      required this.price,
+      required this.holiday});
 
   factory CourtDetails.fromJson(Map<String, dynamic> json) {
     return CourtDetails(
@@ -17,6 +21,9 @@ class CourtDetails {
       email: json['email'],
       mobile: json['mobile'],
       images: json['images'],
+      location: json['loction_Details'],
+      price: json['Price'],
+      holiday: json['Holiday'],
     );
   }
 }
