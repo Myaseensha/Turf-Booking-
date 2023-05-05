@@ -5,7 +5,7 @@ import 'package:turf/screen/turfadd/utils/url.dart';
 
 import '../model/turf_get.dart';
 
-Future<List<Court>> fetchCourts(String query) async {
+Future<List<Court>> fetchCourts(String query, String courtType) async {
   final response = await http.get(Uri.parse(turfgeturi));
 
   if (response.statusCode == 200) {
@@ -14,12 +14,15 @@ Future<List<Court>> fetchCourts(String query) async {
 
     for (var courtData in data) {
       final court = Court.fromJson(courtData);
-      if (query.isEmpty ||
-          court.courtName.toLowerCase().contains(query.toLowerCase())) {
+      if ((query.isEmpty ||
+              court.courtName.toLowerCase().contains(query.toLowerCase())) &&
+          (courtType.isEmpty ||
+              court.event.toLowerCase() == courtType.toLowerCase() ||
+              court.event.isEmpty ||
+              court.district.toLowerCase() == courtType.toLowerCase())) {
         courts.add(court);
       }
     }
-
     return courts;
   } else {
     throw Exception('Failed to fetch courts');

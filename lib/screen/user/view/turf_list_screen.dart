@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:turf/core/h_w.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/user/controller/single_turfget.dart';
@@ -9,6 +10,8 @@ import 'package:turf/screen/user/view/singel_turf_screen.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../widget/category_button.dart';
 import '../../../widget/search_bar.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 class TurfProfileSceen extends StatefulWidget {
   const TurfProfileSceen({Key? key}) : super(key: key);
@@ -19,7 +22,7 @@ class TurfProfileSceen extends StatefulWidget {
 
 class _TurfProfileSceenState extends State<TurfProfileSceen> {
   String searchQuery = '';
-
+  String courtType = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,21 +43,61 @@ class _TurfProfileSceenState extends State<TurfProfileSceen> {
               height: 50,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: const [
-                  CategoryButton(title: 'All'),
-                  CategoryButton(title: 'Football'),
-                  CategoryButton(title: 'Nearby'),
-                  CategoryButton(title: 'Gym'),
-                  CategoryButton(title: 'Location'),
+                children: [
+                  CategoryButton(
+                    title: 'All',
+                    onpress: () {
+                      setState(() {
+                        courtType = "";
+                      });
+                    },
+                  ),
+                  CategoryButton(
+                    title: 'Football',
+                    onpress: () {
+                      setState(() {
+                        courtType = "football";
+                      });
+                    },
+                  ),
+                  CategoryButton(
+                    title: 'Gym',
+                    onpress: () {
+                      setState(() {
+                        courtType = "gym";
+                      });
+                    },
+                  ),
+                  CategoryButton(
+                    title: 'Nearby',
+                    onpress: () async {
+                      Position position = await Geolocator.getCurrentPosition(
+                          desiredAccuracy: LocationAccuracy.high);
+                      double latitude = position.latitude;
+                      double longitude = position.longitude;
+
+                      String? nearbyLocation =
+                          await getNearbyLocationName(latitude, longitude);
+                      setState(() {
+                        courtType = nearbyLocation!;
+                        print(nearbyLocation);
+                      });
+                    },
+                  )
                 ],
               ),
             ),
             Expanded(
               child: FutureBuilder<List<Court>>(
-                future: fetchCourts(searchQuery),
+                future: fetchCourts(searchQuery, courtType),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final courts = snapshot.data!;
+                    if (courts.isEmpty) {
+                      return Center(
+                          child: Lottie.asset(
+                              "assets/Lottie/33740-sad-empty-box.json"));
+                    }
                     return ListView.separated(
                       itemCount: courts.length,
                       itemBuilder: (context, index) {
@@ -174,7 +217,6 @@ class _TurfProfileSceenState extends State<TurfProfileSceen> {
                       },
                     );
                   } else {
-                    // shimmer effect
                     return Shimmer.fromColors(
                       baseColor: Colors.grey[300]!,
                       highlightColor: Colors.grey[100]!,
@@ -207,5 +249,13 @@ class _TurfProfileSceenState extends State<TurfProfileSceen> {
         ),
       ),
     );
+  }
+
+  Future<String?> getNearbyLocationName(
+      double latitude, double longitude) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longitude);
+    Placemark placemark = placemarks[4];
+    return placemark.locality ?? placemark.administrativeArea;
   }
 }

@@ -10,12 +10,10 @@ class SingleCourt {
   final String state;
   final String holiday;
   final String event;
-  final double price;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int price;
   final bool request;
   final bool block;
-  final double rating;
+  final num rating;
 
   SingleCourt(
       {required this.id,
@@ -30,8 +28,6 @@ class SingleCourt {
       required this.holiday,
       required this.event,
       required this.price,
-      required this.createdAt,
-      required this.updatedAt,
       required this.request,
       required this.block,
       required this.rating});
@@ -49,9 +45,7 @@ class SingleCourt {
         state: json['state'],
         holiday: json['Holiday'],
         event: json['event'],
-        price: json['Price'].toDouble(),
-        createdAt: DateTime.parse(json['createdAt']),
-        updatedAt: DateTime.parse(json['updatedAt']),
+        price: json['Price'],
         request: json['request'],
         block: json['block'],
         rating: json['rating']);

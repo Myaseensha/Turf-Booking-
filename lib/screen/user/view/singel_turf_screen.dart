@@ -12,6 +12,7 @@ import 'package:turf/screen/user/view/turf_booking_page.dart';
 import '../../../core/bottomsheet_style.dart';
 import '../../../widget/button.dart';
 import '../model/single_turf_get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OneOneTurfPage extends StatefulWidget {
   final String id;
@@ -124,9 +125,20 @@ class _OneOneTurfPageState extends State<OneOneTurfPage>
                                       12,
                                       Icons.location_on_rounded,
                                       maxWidth,
-                                      maxHeight,
-                                      onpress: () {},
-                                      text: "Location"),
+                                      maxHeight, onpress: () async {
+                                    String locationName =
+                                        "${courts.locationDetails}, ${courts.location}, ${courts.district}";
+                                    String url =
+                                        'https://www.google.com/maps/search/?api=1&query=$locationName';
+
+                                    // ignore: deprecated_member_use
+                                    if (await canLaunch(url)) {
+                                      // ignore: deprecated_member_use
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  }, text: "Location"),
                                   fancyfunctionButton(
                                       conGreen,
                                       0.40,
@@ -218,21 +230,33 @@ class _OneOneTurfPageState extends State<OneOneTurfPage>
                                               '${courts.state}, ${courts.district}, ${courts.location}, ${courts.locationDetails}',
                                               style: subtextstyle(maxWidth)),
                                         ),
-                                        ListTile(
-                                          leading: Icon(Icons.phone,
-                                              color: conBlack),
-                                          title: Text('Contact',
-                                              style: textstyle(maxWidth)),
-                                          subtitle: Text(courts.mobile,
-                                              style: subtextstyle(maxWidth)),
+                                        GestureDetector(
+                                          onTap: () {
+                                            // ignore: deprecated_member_use
+                                            launch("tel:${courts.mobile}");
+                                          },
+                                          child: ListTile(
+                                            leading: Icon(Icons.phone,
+                                                color: conBlack),
+                                            title: Text('Contact',
+                                                style: textstyle(maxWidth)),
+                                            subtitle: Text(courts.mobile,
+                                                style: subtextstyle(maxWidth)),
+                                          ),
                                         ),
-                                        ListTile(
-                                          leading: Icon(Icons.email,
-                                              color: conBlack),
-                                          title: Text('Email',
-                                              style: textstyle(maxWidth)),
-                                          subtitle: Text(courts.email,
-                                              style: subtextstyle(maxWidth)),
+                                        GestureDetector(
+                                          onTap: () {
+                                            // ignore: deprecated_member_use
+                                            launch("mailto:${courts.email}");
+                                          },
+                                          child: ListTile(
+                                            leading: Icon(Icons.email,
+                                                color: conBlack),
+                                            title: Text('Email',
+                                                style: textstyle(maxWidth)),
+                                            subtitle: Text(courts.email,
+                                                style: subtextstyle(maxWidth)),
+                                          ),
                                         ),
                                         ListTile(
                                           leading: Icon(Icons.event,
