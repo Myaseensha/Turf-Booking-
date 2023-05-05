@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/padding.dart';
+import 'package:turf/screen/user/controller/reviwe_get.dart';
 import 'package:turf/screen/user/controller/single_turfget.dart';
 import 'package:turf/screen/user/controller/user_details_get.dart';
+import 'package:turf/screen/user/model/review_model.dart';
+import 'package:turf/screen/user/view/review_card.dart';
+import 'package:turf/screen/user/view/review_submitebox.dart';
 import 'package:turf/screen/user/view/turf_booking_page.dart';
 import '../../../core/bottomsheet_style.dart';
 import '../../../widget/button.dart';
 import '../model/single_turf_get.dart';
 
-class OneOneTurfPage extends StatelessWidget {
+class OneOneTurfPage extends StatefulWidget {
   final String id;
 
   const OneOneTurfPage({
@@ -18,11 +22,31 @@ class OneOneTurfPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<OneOneTurfPage> createState() => _OneOneTurfPageState();
+}
+
+class _OneOneTurfPageState extends State<OneOneTurfPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     getUserDetails();
     return Scaffold(
         body: FutureBuilder<SingleCourt>(
-      future: fetchSingleCourts(id),
+      future: fetchSingleCourts(widget.id),
       builder: (BuildContext context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -123,7 +147,7 @@ class OneOneTurfPage extends StatelessWidget {
                                                     .height *
                                                 0.55,
                                             child: BookingPage(
-                                              tokenid: id,
+                                              tokenid: widget.id,
                                               email: courts.email,
                                               number: courts.mobile,
                                               userName: courts.courtName,
@@ -136,76 +160,138 @@ class OneOneTurfPage extends StatelessWidget {
                                   }, text: "Book Slots"),
                                   fancyfunctionButton(Colors.orange, 0.23, 12,
                                       Icons.star, maxWidth, maxHeight,
-                                      onpress: () {}, text: "Reviews"),
+                                      ratings: courts.rating
+                                          .toStringAsFixed(1)
+                                          .toString(), onpress: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => ReviewDialog(
+                                        id: widget.id,
+                                      ),
+                                    );
+                                  }, text: "Review"),
                                 ],
                               ),
                             ],
                           ),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Card(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 10),
-                                    ListTile(
-                                      leading: Icon(Icons.location_pin,
-                                          color: conBlack),
-                                      title: Text(
-                                        'Location',
-                                        style: textstyle(maxWidth),
-                                      ),
-                                      subtitle: Text(
-                                          '${courts.state}, ${courts.district}, ${courts.location}, ${courts.locationDetails}',
-                                          style: subtextstyle(maxWidth)),
-                                    ),
-                                    ListTile(
-                                      leading:
-                                          Icon(Icons.phone, color: conBlack),
-                                      title: Text('Contact',
-                                          style: textstyle(maxWidth)),
-                                      subtitle: Text(courts.mobile,
-                                          style: subtextstyle(maxWidth)),
-                                    ),
-                                    ListTile(
-                                      leading:
-                                          Icon(Icons.email, color: conBlack),
-                                      title: Text('Email',
-                                          style: textstyle(maxWidth)),
-                                      subtitle: Text(courts.email,
-                                          style: subtextstyle(maxWidth)),
-                                    ),
-                                    ListTile(
-                                      leading:
-                                          Icon(Icons.event, color: conBlack),
-                                      title: Text(
-                                        'Event Type',
-                                        style: textstyle(maxWidth),
-                                      ),
-                                      subtitle: Text(courts.event,
-                                          style: subtextstyle(maxWidth)),
-                                    ),
-                                    ListTile(
-                                      leading: Icon(Icons.attach_money,
-                                          color: conBlack),
-                                      title: Text('Court Fee',
-                                          style: textstyle(maxWidth)),
-                                      subtitle: Text('${courts.price}',
-                                          style: subtextstyle(maxWidth)),
-                                    ),
-                                    ListTile(
-                                      leading: Icon(Icons.calendar_today,
-                                          color: conBlack),
-                                      title: Text('Holiday',
-                                          style: textstyle(maxWidth)),
-                                      subtitle: Text(
-                                        courts.holiday,
-                                        style: subtextstyle(maxWidth),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                          SizedBox(height: maxHeight * 0.02),
+                          Padding(
+                            padding: pRL10,
+                            child: SizedBox(
+                              height: 30,
+                              child: TabBar(
+                                labelStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                controller: _tabController,
+                                labelColor: conGreen,
+                                unselectedLabelColor: Colors.black,
+                                tabs: const [
+                                  Tab(
+                                    text: 'Turf Details',
+                                  ),
+                                  Tab(
+                                    text: 'Reviews',
+                                  ),
+                                ],
                               ),
+                            ),
+                          ),
+                          Expanded(
+                            child: TabBarView(
+                              controller: _tabController,
+                              children: [
+                                SingleChildScrollView(
+                                  child: Card(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 10),
+                                        ListTile(
+                                          leading: Icon(Icons.location_pin,
+                                              color: conBlack),
+                                          title: Text(
+                                            'Location',
+                                            style: textstyle(maxWidth),
+                                          ),
+                                          subtitle: Text(
+                                              '${courts.state}, ${courts.district}, ${courts.location}, ${courts.locationDetails}',
+                                              style: subtextstyle(maxWidth)),
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.phone,
+                                              color: conBlack),
+                                          title: Text('Contact',
+                                              style: textstyle(maxWidth)),
+                                          subtitle: Text(courts.mobile,
+                                              style: subtextstyle(maxWidth)),
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.email,
+                                              color: conBlack),
+                                          title: Text('Email',
+                                              style: textstyle(maxWidth)),
+                                          subtitle: Text(courts.email,
+                                              style: subtextstyle(maxWidth)),
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.event,
+                                              color: conBlack),
+                                          title: Text(
+                                            'Event Type',
+                                            style: textstyle(maxWidth),
+                                          ),
+                                          subtitle: Text(courts.event,
+                                              style: subtextstyle(maxWidth)),
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.attach_money,
+                                              color: conBlack),
+                                          title: Text('Court Fee',
+                                              style: textstyle(maxWidth)),
+                                          subtitle: Text('${courts.price}',
+                                              style: subtextstyle(maxWidth)),
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.calendar_today,
+                                              color: conBlack),
+                                          title: Text('Holiday',
+                                              style: textstyle(maxWidth)),
+                                          subtitle: Text(
+                                            courts.holiday,
+                                            style: subtextstyle(maxWidth),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                FutureBuilder<List<ReviewGet>>(
+                                  future: reviewGet(widget.id),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      final reviews = snapshot.data!;
+                                      return ListView.builder(
+                                        itemCount: reviews.length,
+                                        itemBuilder: (context, index) {
+                                          final review = reviews[index];
+                                          return ReviewCard(
+                                            username: review.user,
+                                            review: review.review,
+                                            rating: review.rating,
+                                          );
+                                        },
+                                      );
+                                    } else if (snapshot.hasError) {
+                                      return Text(
+                                          "Failed to fetch reviews: ${snapshot.error}");
+                                    } else {
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    }
+                                  },
+                                )
+                              ],
                             ),
                           ),
                         ],

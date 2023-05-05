@@ -52,6 +52,7 @@ fancyfunctionButton(
   IconData icon,
   double maxWidth,
   double maxHeight, {
+  String ratings = " ",
   required String text,
   required VoidCallback onpress,
 }) {
@@ -73,9 +74,22 @@ fancyfunctionButton(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            color: colorI,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: colorI,
+              ),
+              Text(
+                textAlign: TextAlign.end,
+                ratings,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
           ),
           const SizedBox(height: 8),
           Text(

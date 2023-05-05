@@ -23,7 +23,6 @@ Future<void> createCourt(BuildContext context, CourtAdd court) async {
       'loction_Details': court.locationDetails,
       'images': await MultipartFile.fromFile(court.imageFiles[0].path),
     });
-
     final response = await dio.post(
       ceratcourt,
       data: formData,
