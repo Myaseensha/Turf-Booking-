@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:turf/screen/turfadd/model/court_get.dart';
@@ -17,6 +18,7 @@ Future<CourtDetails?> fetchTurfProfile(
     );
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
+      print(responseData);
       return CourtDetails.fromJson(responseData);
     } else {
       final responseData = jsonDecode(response.body);

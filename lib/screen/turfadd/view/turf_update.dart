@@ -8,15 +8,18 @@ import '../../../widget/from_filde.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class TurfUpdate extends StatefulWidget {
-  TurfUpdate(
-      {super.key,
-      required this.email,
-      required this.mobile,
-      required this.price,
-      required this.locatiion,
-      required this.turfname,
-      required this.holiday,
-      required this.token});
+  TurfUpdate({
+    super.key,
+    required this.email,
+    required this.mobile,
+    required this.price,
+    required this.locatiion,
+    required this.turfname,
+    required this.holiday,
+    required this.token,
+    required this.closingTime,
+    required this.openingTime,
+  });
   String token;
   String email;
   String mobile;
@@ -24,25 +27,24 @@ class TurfUpdate extends StatefulWidget {
   String locatiion;
   String turfname;
   String holiday;
+  String closingTime;
+  String openingTime;
+
   @override
   State<TurfUpdate> createState() => _TurfUpdateState();
 }
 
 class _TurfUpdateState extends State<TurfUpdate> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
   final GlobalKey<FormState> _formKey = GlobalKey();
-
   late TextEditingController emailController;
-
   late TextEditingController turfnameController;
-
   late TextEditingController numberController;
-
   late TextEditingController holidayController;
-
   late TextEditingController locationController;
   late TextEditingController priceController;
+  late DateTime _startTime;
+  late DateTime _endTime;
   @override
   void initState() {
     emailController = TextEditingController(text: widget.email);
@@ -51,11 +53,10 @@ class _TurfUpdateState extends State<TurfUpdate> {
     locationController = TextEditingController(text: widget.locatiion);
     numberController = TextEditingController(text: widget.mobile);
     priceController = TextEditingController(text: widget.price);
+    _startTime = DateTime.parse(widget.openingTime);
+    _endTime = DateTime.parse(widget.closingTime);
     super.initState();
   }
-
-  DateTime _startTime = DateFormat('HH:mm').parse("10:00");
-  DateTime _endTime = DateFormat('HH:mm').parse("10:00");
 
   void _selectStartTime() {
     DatePicker.showTimePicker(
@@ -185,8 +186,8 @@ class _TurfUpdateState extends State<TurfUpdate> {
                           "loction_Details": locationController.text,
                           "Price": int.parse(priceController.text),
                           "Holiday": holidayController.text,
-                          // "closingTime": _endTime.toString(),
-                          // "openingTime": _startTime.toString(),
+                          "closingTime": _endTime.toString(),
+                          "openingTime": _startTime.toString(),
                         };
                         await turfUpdate(widget.token, data, context);
                       },

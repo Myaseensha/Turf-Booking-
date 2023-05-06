@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turf/core/padding.dart';
 import 'package:turf/screen/turfadd/controller/dashboard.dart';
 
@@ -9,6 +10,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:turf/screen/turfadd/view/turf_update.dart';
 import 'package:turf/screen/turfadd/view/user_booking_report.dart';
 
+import '../../onborde_screen/splash_screen.dart';
 import 'booking_count_card.dart';
 import 'booking_table.dart';
 
@@ -83,6 +85,8 @@ class TurfProfile extends StatelessWidget {
                                             price: court.price.toString(),
                                             turfname: court.courtName,
                                             token: token,
+                                            closingTime: court.closingTime,
+                                            openingTime: court.openingTime,
                                           ),
                                         ));
                                   },
@@ -182,7 +186,7 @@ class TurfProfile extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: maxHeight * 0.02),
+                                  SizedBox(height: maxHeight * 0.01),
                                   ExpansionTile(
                                     title: Card(
                                       color: Colors.blueAccent,
@@ -250,6 +254,46 @@ class TurfProfile extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                                  SizedBox(height: maxHeight * 0.01),
+                                  Padding(
+                                    padding: pRL10,
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.red,
+                                          textStyle: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 24,
+                                            vertical: 16,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        onPressed: () async {
+                                          SharedPreferences prefs =
+                                              await SharedPreferences
+                                                  .getInstance();
+                                          prefs.clear();
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const SplashScreen(),
+                                            ),
+                                            (route) => false,
+                                          );
+                                        },
+                                        child: const Text("Log out"),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: maxHeight * 0.02),
                                 ],
                               ),
                             ),
