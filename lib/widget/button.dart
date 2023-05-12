@@ -28,16 +28,32 @@ class Button extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onpress,
           style: ElevatedButton.styleFrom(
-            foregroundColor: colorF,
-            backgroundColor: colorB,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(7),
+              borderRadius: BorderRadius.circular(25),
             ),
-            elevation: 10.0,
+            padding: const EdgeInsets.all(0),
           ),
-          child: Padding(
-            padding: p10,
-            child: Text(title, style: style),
+          child: Ink(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [colorB.withOpacity(0.8), colorB],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style: style.copyWith(
+                  color: colorF,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ),
       ),
