@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:turf/screen/turfadd/model/user_detials.dart';
@@ -28,14 +30,15 @@ class UserBookingReport extends StatelessWidget {
                     user.bookDate; // Replace with your DateTime object
                 String formattedDate = DateFormat('dd/MM/yyyy').format(date);
                 return Container(
-                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   decoration: BoxDecoration(
-                    color: Color(0xffF2F2F2),
+                    color: const Color(0xffF2F2F2),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
-                        offset: Offset(0, 4),
+                        offset: const Offset(0, 4),
                         blurRadius: 4,
                       ),
                     ],
@@ -45,87 +48,87 @@ class UserBookingReport extends StatelessWidget {
                     children: [
                       Text(
                         user.user.username,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
                           color: Color(0xff282828),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Row(
                         children: [
-                          Icon(Icons.email_outlined,
+                          const Icon(Icons.email_outlined,
                               size: 20, color: Color(0xff282828)),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             user.user.email,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Color(0xff282828),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
-                          Icon(Icons.phone_outlined,
+                          const Icon(Icons.phone_outlined,
                               size: 20, color: Color(0xff282828)),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             user.user.mobile,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Color(0xff282828),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Row(
                         children: [
-                          Icon(Icons.credit_card_outlined,
+                          const Icon(Icons.credit_card_outlined,
                               size: 20, color: Color(0xff282828)),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             user.payment,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Color(0xff282828),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
-                          Icon(Icons.monetization_on_outlined,
+                          const Icon(Icons.monetization_on_outlined,
                               size: 20, color: Color(0xff282828)),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             user.rate.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Color(0xff282828),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             formattedDate,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xffBFBFBF),
                               fontSize: 14,
                             ),
                           ),
                           Text(
                             time,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xffBFBFBF),
                               fontSize: 14,
                             ),

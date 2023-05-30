@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, empty_catches
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -31,7 +33,5 @@ Future turfUpdate(
           ),
           (route) => false);
     }
-  } catch (e) {
-    print(e);
-  }
+  } catch (e) {}
 }

@@ -22,100 +22,102 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: conWhite,
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                  'assets/image/timothy-tan-PAe2UhGo-S4-unsplash.jpg'),
-              fit: BoxFit.cover,
+      backgroundColor: conWhite,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/image/timothy-tan-PAe2UhGo-S4-unsplash.jpg',
             ),
+            fit: BoxFit.cover,
           ),
-          child: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Image.asset(
-                            'assets/image/football.png',
-                            height: 80.0,
-                          ),
-                          const SizedBox(height: 16.0),
-                          const Text(
-                            'Let\'s Play',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                        ],
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Image.asset(
+                        'assets/image/football.png',
+                        height: 80.0,
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text(
-                            'Find and book sports facilities with ease!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Roboto',
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: const Color(0xFF62B9FF),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 16.0,
-                                horizontal: 40.0,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                            ),
-                            onPressed: () {
-                              checkToken();
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Text(
-                                  'Get Started',
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(width: 10.0),
-                                Icon(Icons.arrow_forward, color: Colors.white),
-                              ],
-                            ),
-                          ),
-                        ],
+                      const SizedBox(height: 16.0),
+                      const Text(
+                        'Let\'s Play',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Roboto',
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        'Find and book sports facilities with ease!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Roboto',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: conGreen,
+                          backgroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 40.0,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          checkToken();
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Get Started',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: conGreen,
+                              ),
+                            ),
+                            const SizedBox(width: 10.0),
+                            Icon(Icons.arrow_forward, color: conGreen),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Future<void> checkToken() async {
@@ -139,6 +141,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final token = pref.getString('Turftoken');
     log(token.toString());
     if (token == null) {
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (ctx) => const IntroScreen()));
     } else {

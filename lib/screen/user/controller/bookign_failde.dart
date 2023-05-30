@@ -23,7 +23,6 @@ Future bookingFailed(String id, String userToken) async {
       throw Exception('Failed to mark booking as failed');
     }
   } catch (error) {
-    print('Error marking booking as failed: $error');
-    throw error;
+    rethrow;
   }
 }

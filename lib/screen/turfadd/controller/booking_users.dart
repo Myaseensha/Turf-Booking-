@@ -18,7 +18,6 @@ Future<List<BookingUser>> bookedUsers(
     },
   );
   if (response.statusCode == 200) {
-    final responseData = jsonDecode(response.body);
     final List<dynamic> data = json.decode(response.body);
     final List<BookingUser> courts = [];
 
@@ -27,7 +26,6 @@ Future<List<BookingUser>> bookedUsers(
 
       courts.add(court);
     }
-    print(responseData);
     return courts;
   } else {
     throw Exception('Failed to fetch data');

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, empty_catches
+
 import 'package:flutter/material.dart';
 
 import 'package:turf/screen/user/utils/base_url.dart';
@@ -12,7 +14,6 @@ Future getUserBookings(String token, BuildContext context) async {
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
 
-      print(responseData);
       return responseData;
     } else {
       final responseData = jsonDecode(response.body);
@@ -27,8 +28,6 @@ Future getUserBookings(String token, BuildContext context) async {
 
       showSnackbar(context, message);
     }
-  } catch (error) {
-    print('Error fetching user bookings: $error');
-  }
+  } catch (error) {}
   return [];
 }

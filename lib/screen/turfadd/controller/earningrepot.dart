@@ -15,7 +15,6 @@ Future<List<EarningReport>> earningReport(
     },
   );
   if (response.statusCode == 200) {
-    print('Earning report loaded successfully');
     final List<dynamic> data = jsonDecode(response.body);
     final List<EarningReport> earning = [];
     for (var earningData in data) {

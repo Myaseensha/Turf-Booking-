@@ -15,7 +15,6 @@ Future<Map<String, dynamic>> bookingReport(String token) async {
 
   if (response.statusCode == 200) {
     final result = jsonDecode(response.body);
-    print(response.body);
     return result;
   } else {
     throw Exception('Failed to fetch data');

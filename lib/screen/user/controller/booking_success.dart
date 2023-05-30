@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, empty_catches
+
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +32,6 @@ Future bookingSuccess(
         content: Text("$message"),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      print('Booking success');
-      print(response.data);
       result = true;
       return result;
     } else {
@@ -43,7 +43,5 @@ Future bookingSuccess(
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-  } catch (error) {
-    print('Error updating booking status: $error');
-  }
+  } catch (error) {}
 }

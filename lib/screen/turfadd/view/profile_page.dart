@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -261,7 +263,7 @@ class TurfProfile extends StatelessWidget {
                                       width: double.infinity,
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          primary: Colors.red,
+                                          backgroundColor: Colors.red,
                                           textStyle: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,

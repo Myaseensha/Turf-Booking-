@@ -23,6 +23,7 @@ Future<void> getBookedSlots(
       behavior: SnackBarBehavior.floating,
       content: Text('$message'),
     );
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

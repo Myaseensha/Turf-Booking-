@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/screen/turfadd/controller/turf_update.dart';
@@ -88,7 +89,7 @@ class _TurfUpdateState extends State<TurfUpdate> {
       key: scaffoldKey,
       backgroundColor: conWhite,
       appBar: AppBar(
-        title: Text("Update your turf"),
+        title: const Text("Update your turf"),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -144,7 +145,7 @@ class _TurfUpdateState extends State<TurfUpdate> {
                   validetmsg: "Please enter price",
                   controllers: priceController,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -156,11 +157,11 @@ class _TurfUpdateState extends State<TurfUpdate> {
                           _startTime != null
                               ? 'Open Time: ${_startTime.hour}:${_startTime.minute}'
                               : 'Select Start Time',
-                          style: TextStyle(overflow: TextOverflow.fade),
+                          style: const TextStyle(overflow: TextOverflow.fade),
                         ),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     SizedBox(
                       width: 150,
                       child: ElevatedButton(
