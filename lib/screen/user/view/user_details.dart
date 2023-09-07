@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turf/core/h_w.dart';
-import 'package:turf/core/padding.dart';
 
 import 'package:turf/screen/onborde_screen/splash_screen.dart';
 import 'package:turf/screen/user/controller/user_details_edit.dart';

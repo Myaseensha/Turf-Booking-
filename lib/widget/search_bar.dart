@@ -5,8 +5,8 @@ import 'package:turf/core/color.dart';
 import 'package:turf/screen/user/controller/user_details_get.dart';
 import 'package:turf/screen/user/view/user_details.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({
+class SearchBars extends StatelessWidget {
+  const SearchBars({
     Key? key,
     required this.searchQuery,
     required this.onSearchQueryChanged,

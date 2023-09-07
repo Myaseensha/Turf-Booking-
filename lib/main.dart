@@ -11,7 +11,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+//completed
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CourtProviderimage(),
         ),
         ChangeNotifierProvider(create: (_) => DateModel()..generateDates()),
-        ChangeNotifierProvider(create: (_) => TimeModel()),
+        ChangeNotifierProvider(create: (_) => TimeModel())
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

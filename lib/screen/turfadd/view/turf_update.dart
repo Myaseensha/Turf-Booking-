@@ -1,16 +1,14 @@
-// ignore_for_file: must_be_immutable, unnecessary_null_comparison
-
 import 'package:flutter/material.dart';
 import 'package:turf/core/color.dart';
 import 'package:turf/core/hard_text.dart';
 import 'package:turf/screen/turfadd/controller/turf_update.dart';
 import '../../../core/padding.dart';
 import '../../../widget/from_filde.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+// ignore: must_be_immutable
 class TurfUpdate extends StatefulWidget {
   TurfUpdate({
-    super.key,
+    Key? key,
     required this.email,
     required this.mobile,
     required this.price,
@@ -20,7 +18,8 @@ class TurfUpdate extends StatefulWidget {
     required this.token,
     required this.closingTime,
     required this.openingTime,
-  });
+  }) : super(key: key);
+
   String token;
   String email;
   String mobile;
@@ -46,6 +45,7 @@ class _TurfUpdateState extends State<TurfUpdate> {
   late TextEditingController priceController;
   late DateTime _startTime;
   late DateTime _endTime;
+
   @override
   void initState() {
     emailController = TextEditingController(text: widget.email);
@@ -59,28 +59,46 @@ class _TurfUpdateState extends State<TurfUpdate> {
     super.initState();
   }
 
-  void _selectStartTime() {
-    DatePicker.showTimePicker(
-      context,
-      showSecondsColumn: false,
-      onConfirm: (dateTime) {
-        setState(() {
-          _startTime = dateTime;
-        });
-      },
+  Future<void> _selectStartTime() async {
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: _startTime,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
     );
+
+    if (selectedDate != null) {
+      setState(() {
+        _startTime = DateTime(
+          selectedDate.year,
+          selectedDate.month,
+          selectedDate.day,
+          _startTime.hour,
+          _startTime.minute,
+        );
+      });
+    }
   }
 
-  void _selectEndTime() {
-    DatePicker.showTimePicker(
-      context,
-      showSecondsColumn: false,
-      onConfirm: (dateTime) {
-        setState(() {
-          _endTime = dateTime;
-        });
-      },
+  Future<void> _selectEndTime() async {
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: _endTime,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
     );
+
+    if (selectedDate != null) {
+      setState(() {
+        _endTime = DateTime(
+          selectedDate.year,
+          selectedDate.month,
+          selectedDate.day,
+          _endTime.hour,
+          _endTime.minute,
+        );
+      });
+    }
   }
 
   @override
@@ -93,10 +111,10 @@ class _TurfUpdateState extends State<TurfUpdate> {
         centerTitle: true,
       ),
       body: SafeArea(
-          child: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -197,9 +215,11 @@ class _TurfUpdateState extends State<TurfUpdate> {
                     ),
                   ),
                 ),
-              ]),
+              ],
+            ),
+          ),
         ),
-      )),
+      ),
     );
   }
 }

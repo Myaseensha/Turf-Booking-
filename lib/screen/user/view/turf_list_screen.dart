@@ -31,7 +31,7 @@ class _TurfProfileSceenState extends State<TurfProfileSceen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SearchBar(
+            SearchBars(
               searchQuery: searchQuery,
               onSearchQueryChanged: (query) {
                 setState(() {

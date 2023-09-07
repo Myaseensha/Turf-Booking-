@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../core/color.dart';
 import '../core/padding.dart';
 
+// ignore: must_be_immutable
 class CategoryButton extends StatelessWidget {
   final String title;
   VoidCallback onpress;
